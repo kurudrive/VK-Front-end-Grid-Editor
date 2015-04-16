@@ -44,58 +44,76 @@
 
 
 /*-------------------------------------------*/
-// row
+// htmlパーツ
 /*-------------------------------------------*/
 // 行追加編集パネル
 var html_rowEditPanel = '<div class="vkEdit_editPanel_row"><span class="vkEdit_btn vkEdit_btn_addRow">Add Row</span><span class="vkEdit_btn vkEdit_btn_delete">Delete row</span></div>';
 var html_rowDefaultSet = '<div class="row"><div class="col-md-12 column">&nbsp;</div></div>';
 
+// カラムアクティブ編集ボタン
+var html_gridEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden"><span class="vkEdit_btn vkEdit_btn_change">Change</span><span class="vkEdit_btn vkEdit_btn_cancel">Cancel</span></div>';
+// カラム非アクティブ編集ボタン
+var html_gridEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover"><span class="vkEdit_btn vkEdit_btn_edit">Edit</span></div>';
+// カラム編集パネルのHTML
+var html_gridEditPanel = '<div class="vkEdit_editPanel_col">'+ html_gridEditPanel_btnSet_hover + html_gridEditPanel_btnSet_active + '</div>';
+// 対象のカラム識別用クラス
+// var column_no = 'column_no_' + i;
+// カラム識別用のクラスとhover識別用クラスを編集に入れる
+var editting_class = 'vkEdit_column_hover';
 
-jQuery('.entry-content .row').each(function(i){
-	jQuery(this).mouseenter(function(){
 
-		// ホバー状態でない時
-		if (!jQuery(this).hasClass('vkEdit_row_hover')) {
-
-			// ホバー識別クラス追加
-			jQuery(this).addClass('vkEdit_row_hover');
-
-			// 編集バー表示 
-			jQuery(this).append(html_rowEditPanel);
-			jQuery(this).prepend(html_rowEditPanel);
-
-			jQuery(this).find('.vkEdit_btn_addRow').click(function(){
-				jQuery(this).parent().parent().before(html_rowDefaultSet);
-			});
-
-		}
-	}); // jQuery(this).mouseenter(function(){
-	jQuery(this).mouseleave(function(){
-		jQuery(this).removeClass('vkEdit_row_hover');
-		jQuery(this).children('.vkEdit_editPanel_row').each(function(){
-			jQuery(this).remove();
-		});
-	}); // jQuery(this).mouseleave(function(){
+jQuery(document).ready(function($){
+	vkEdit_row_action();
+	vkEdit_col_action();
 });
+
+/*-------------------------------------------*/
+// row の基本処理
+/*-------------------------------------------*/
+function vkEdit_row_action(){
+	jQuery('.entry-content .row').each(function(i){
+		jQuery(this).mouseenter(function(){
+			// ホバー状態でない時
+			if (!jQuery(this).hasClass('vkEdit_row_hover')) {
+
+				// ホバー識別クラス追加
+				jQuery(this).addClass('vkEdit_row_hover');
+
+				// 編集バー表示 
+				jQuery(this).append(html_rowEditPanel);
+				jQuery(this).prepend(html_rowEditPanel);
+
+				vkEdit_btn_addRow();
+
+			}
+		}); // jQuery(this).mouseenter(function(){
+		jQuery(this).mouseleave(function(){
+			jQuery(this).removeClass('vkEdit_row_hover');
+			jQuery(this).children('.vkEdit_editPanel_row').each(function(){
+				jQuery(this).remove();
+			});
+		}); // jQuery(this).mouseleave(function(){
+	});
+}
+
+/*-------------------------------------------*/
+// row追加ボタンが押された時の処理
+/*-------------------------------------------*/
+function vkEdit_btn_addRow(){
+	jQuery('.vkEdit_btn_addRow').click(function(){
+		jQuery(this).parent().parent().before(html_rowDefaultSet);
+		vkEdit_row_action();
+		vkEdit_col_action();
+	});
+}
 
 
 /*-------------------------------------------*/
 // カラム
 /*-------------------------------------------*/
-
+function vkEdit_col_action(){
 // function vkColInnerMouseAction(){
 jQuery('.entry-content .row .column').each(function(i){
-	// アクティブ編集ボタン
-	var html_gridEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden"><span class="vkEdit_btn vkEdit_btn_change">Change</span><span class="vkEdit_btn vkEdit_btn_cancel">Cancel</span></div>';
-	// 非アクティブ編集ボタン
-	var html_gridEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover"><span class="vkEdit_btn vkEdit_btn_edit">Edit</span></div>';
-	// 編集パネルのHTML
-	var html_gridEditPanel = '<div class="vkEdit_editPanel_col">'+ html_gridEditPanel_btnSet_hover + html_gridEditPanel_btnSet_active + '</div>';
-	// 対象のカラム識別用クラス
-	// var column_no = 'column_no_' + i;
-	// カラム識別用のクラスとhover識別用クラスを編集に入れる
-	var editting_class = 'vkEdit_column_hover';
-
 
 	/*-------------------------------------------*/
 	// カラムにマウスオーバーしたら
@@ -195,7 +213,5 @@ jQuery('.entry-content .row .column').each(function(i){
 	}); //jQuery(this).mouseleave(function(){
 
 });
-
-
-
+} // function vkEdit_col_action()
 
