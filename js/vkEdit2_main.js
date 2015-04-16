@@ -79,11 +79,18 @@ function vkEdit_row_action(){
 				// ホバー識別クラス追加
 				jQuery(this).addClass('vkEdit_row_hover');
 
-				// 編集バー表示 
-				jQuery(this).append(html_rowEditPanel);
-				jQuery(this).prepend(html_rowEditPanel);
+				// 編集バー表示
+				// 編集バーを前後に追加した後でアニメーション
+				jQuery(this).append(html_rowEditPanel).prepend(html_rowEditPanel).children('.vkEdit_editPanel_row').each(function(){
+					jQuery(this).animate({ 
+						height: "22px",
+						opacity: 1
+					}, 500);
+				});
 
+				// rowを追加
 				vkEdit_btn_addRow();
+				// rowを削除
 				vkEdit_btn_delRow();
 
 			}
@@ -91,7 +98,15 @@ function vkEdit_row_action(){
 		jQuery(this).mouseleave(function(){
 			jQuery(this).removeClass('vkEdit_row_hover');
 			jQuery(this).children('.vkEdit_editPanel_row').each(function(){
-				jQuery(this).remove();
+				// jQuery(this).fadeOut(500,function(){
+				// 	jQuery(this).remove();
+				// });
+				jQuery(this).animate({ 
+					height: '0',
+					opacity: 0
+				}, 500, function(){
+					jQuery(this).remove();
+				});
 			});
 		}); // jQuery(this).mouseleave(function(){
 	});
@@ -136,6 +151,11 @@ jQuery('.entry-content .row .column').each(function(i){
 		jQuery(this).wrapInner('<div class="vkEdit_column_inner">');
 		// row内、Add hover panel
 		jQuery(this).children('.vkEdit_column_inner').before( html_gridEditPanel );
+		// editパネルをアニメーションしながら表示
+		jQuery(this).children('.vkEdit_column_inner').prev('.vkEdit_editPanel_col').animate({ 
+			height: "22px",
+			opacity: 1
+		}, 500);
 
 		/*-------------------------------------------*/
 		// Edit ボタンが押された時の動作
@@ -143,7 +163,7 @@ jQuery('.entry-content .row .column').each(function(i){
 		jQuery(this).find('.vkEdit_editPanel_col .vkEdit_btn_edit').click(function(){
 
 			// カラムにアクティブクラスを追加
-			jQuery(this).parent().parent().parent().addClass('vkEdit_edit_active');
+			jQuery(this).parent().parent().parent().addClass('vkEdit_column_active');
 
 			// 表示するボタンの切り替え
 
@@ -162,7 +182,7 @@ jQuery('.entry-content .row .column').each(function(i){
 			jQuery(this).parent().parent().find('.vkEdit_btn_change').click(function(){
 
 				// カラムからアクティブクラスを削除
-				jQuery(this).parent().parent().parent().removeClass('vkEdit_edit_active');
+				jQuery(this).parent().parent().parent().removeClass('vkEdit_column_active');
 
 				// 表示するボタンの切り替え
 
@@ -184,7 +204,7 @@ jQuery('.entry-content .row .column').each(function(i){
 			jQuery(this).parent().parent().find('.vkEdit_btn_cancel').click(function(){
 
 				// カラムからアクティブクラスを削除
-				jQuery(this).parent().parent().parent().removeClass('vkEdit_edit_active');
+				jQuery(this).parent().parent().parent().removeClass('vkEdit_column_active');
 
 				// 表示するボタンの切り替え
 
@@ -205,17 +225,27 @@ jQuery('.entry-content .row .column').each(function(i){
 
 	});	// カラムにマウスオーバーしたら
 
+	/*-------------------------------------------*/
+	// カラムからマウスアウトしたら
+	/*-------------------------------------------*/
 	jQuery(this).mouseleave(function(){
-	// 	// 編集中ではない場合
-		if(!jQuery(this).hasClass('vkEdit_edit_active')){
+
+		// 編集中ではない場合
+		if(!jQuery(this).hasClass('vkEdit_column_active')){
 			var html_column = jQuery(this).children('.vkEdit_column_inner').html();
-			jQuery(this).html(html_column);
 			// エディットパネルを削除
-			jQuery(this).children('.vkEdit_editPanel_col').remove();
-			// ホバークラスを削除
+			jQuery(this).children('.vkEdit_editPanel_col').animate({ 
+				height: "1px",
+				opacity: 0
+			}, 500,function(){
+				// エディットパネルの親にhtml書き換え
+				jQuery(this).parent().html(html_column);
+			});
+			// カラムからホバークラスを削除
 			jQuery(this).removeClass(editting_class);
-		}
-		
+
+		} // if(!jQuery(this).hasClass('vkEdit_column_active')){
+
 	}); //jQuery(this).mouseleave(function(){
 
 });
