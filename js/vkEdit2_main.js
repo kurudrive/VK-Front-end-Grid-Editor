@@ -233,17 +233,9 @@ jQuery('.entry-content .row .column').each(function(i){
 		// 編集中ではない場合
 		if(!jQuery(this).hasClass('vkEdit_column_active')){
 			var html_column = jQuery(this).children('.vkEdit_column_inner').html();
-			// エディットパネルを削除
-			jQuery(this).children('.vkEdit_editPanel_col').animate({ 
-				height: "1px",
-				opacity: 0
-			}, 500,function(){
-				// エディットパネルの親にhtml書き換え
-				jQuery(this).parent().html(html_column);
-			});
+			jQuery(this).html(html_column);
 			// カラムからホバークラスを削除
 			jQuery(this).removeClass(editting_class);
-
 		} // if(!jQuery(this).hasClass('vkEdit_column_active')){
 
 	}); //jQuery(this).mouseleave(function(){
