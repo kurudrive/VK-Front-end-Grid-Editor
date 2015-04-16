@@ -59,7 +59,6 @@ jQuery('#submit').click(function(){
 	<?php global $post; ?>
 	var post_id = '<?php echo $post->ID; ?>';
     var post_content = jQuery('.entry-content').html();
-    console.log(post_content);
     jQuery.ajax({
         type: 'POST',
         url: ajaxurl,

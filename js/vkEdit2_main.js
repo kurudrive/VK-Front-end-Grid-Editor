@@ -42,6 +42,24 @@
 // 	vkColInnerMouseAction();
 // },500);
 
+
+/*-------------------------------------------*/
+// row
+/*-------------------------------------------*/
+jQuery('.entry-content .row').each(function(i){
+	jQuery(this).mouseenter(function(){
+		jQuery(this).addClass('vkEdit_row_hover');
+	});
+	jQuery(this).mouseleave(function(){
+		jQuery(this).removeClass('vkEdit_row_hover');
+	});
+});
+
+
+/*-------------------------------------------*/
+// カラム
+/*-------------------------------------------*/
+
 // function vkColInnerMouseAction(){
 jQuery('.entry-content .row .column').each(function(i){
 	// アクティブ編集ボタン
@@ -56,7 +74,9 @@ jQuery('.entry-content .row .column').each(function(i){
 	var editting_class = 'vkEdit_column_hover';
 
 
+	/*-------------------------------------------*/
 	// カラムにマウスオーバーしたら
+	/*-------------------------------------------*/
 	jQuery(this).mouseenter(function(){
 	// カラムが既にホバー状態じゃない時
 	if (!jQuery(this).hasClass('vkEdit_column_hover')) {
@@ -76,7 +96,7 @@ jQuery('.entry-content .row .column').each(function(i){
 		jQuery(this).find('.vkEdit_editPanel .vkEdit_btn_edit').click(function(){
 
 			// カラムにアクティブクラスを追加
-			jQuery('.vkEdit_colmun_hover').addClass('vkEdit_edit_active');
+			jQuery(this).parent().parent().parent().addClass('vkEdit_edit_active');
 
 			// 表示するボタンの切り替え
 
@@ -94,6 +114,9 @@ jQuery('.entry-content .row .column').each(function(i){
 			/*-------------------------------------------*/
 			jQuery(this).parent().parent().find('.vkEdit_btn_change').click(function(){
 
+				// カラムからアクティブクラスを削除
+				jQuery(this).parent().parent().parent().removeClass('vkEdit_edit_active');
+
 				// 表示するボタンの切り替え
 
 					// 非表示になっているホバーボタンセットを表示
@@ -103,53 +126,53 @@ jQuery('.entry-content .row .column').each(function(i){
 
 				// innerの中のHTMLをテキストエリアの中身に入れかえ
 				var select_editingTextArea = jQuery(this).parent().parent().parent().find('textarea');
-				var html_after = select_editingTextArea.html();
+				var html_after = select_editingTextArea.val();
 				// textareaを削除
 				select_editingTextArea.before(html_after).remove();
 			});
 
-		});
+			/*-------------------------------------------*/
+			// キャンセルボタンをクリック
+			/*-------------------------------------------*/
+			jQuery(this).parent().parent().find('.vkEdit_btn_cancel').click(function(){
 
+				// カラムからアクティブクラスを削除
+				jQuery(this).parent().parent().parent().removeClass('vkEdit_edit_active');
+
+				// 表示するボタンの切り替え
+
+					// 非表示になっているホバーボタンセットを表示
+					jQuery('.vkEdit_btnSet_hover.hidden').removeClass('hidden');
+					// 表示しているアクティブボタンセットを非表示に
+					jQuery('.vkEdit_btnSet_active').addClass('hidden');
+
+				// innerの中のHTMLをテキストエリアの中身に入れかえ
+				var select_editingTextArea = jQuery(this).parent().parent().parent().find('textarea');
+				// textareaを削除
+				select_editingTextArea.before(html_before).remove();
+			});
+
+		}); // Edit ボタンが押された時の動作
 
 	} // if (jQuery(this).hasClass('vkEdit_edit_hover')) {
-	});
 
-	// jQuery(this).mouseleave(function(){
+	});	// カラムにマウスオーバーしたら
+
+	jQuery(this).mouseleave(function(){
 	// 	// 編集中ではない場合
-	// 	if(!jQuery(this).hasClass('vkEdit_edit_active')){
-	// 		// jQuery(this).unwrapInner('<div class="vkEdit_column_inner">');
-	// 		// remove hover class
-	// 		jQuery(this).children('.vkEdit_editPanel').remove();
-	// 		// jQuery(this).children('.vkEdit_column_inner').unwrap();
-	// 		// jQuery(this).children('textarea').unwrap();
-	// 		// Delete hover class
-	// 		if(jQuery(this).hasClass('vkEdit_edit_hover')){
-	// 			jQuery(this).removeClass(editting_class);
-	// 		}
-	// 	}
-
-
+		if(!jQuery(this).hasClass('vkEdit_edit_active')){
+			var html_column = jQuery(this).children('.vkEdit_column_inner').html();
+			jQuery(this).html(html_column);
+			// エディットパネルを削除
+			jQuery(this).children('.vkEdit_editPanel').remove();
+			// ホバークラスを削除
+			jQuery(this).removeClass(editting_class);
+		}
 		
-	// });
-
-
-
+	}); //jQuery(this).mouseleave(function(){
 
 });
-// }
 
-
-
-
-		// // 編集反映ボタンをクリック
-		// jQuery('.vkEdit_btn_change').click(function(){
-		// 	console.log('_|＼○_ﾋｬｯ ε=＼＿○ﾉ ﾎｰｳ!!');
-		// 	// changeクラスを外してeditクラスに変更。テキストｍEditに戻す
-		// 	// jQuery(this).removeClass('vkEdit_btn_change').addClass('vkEdit_btn_edit').text('Edit');
-		// 	// var html_after = jQuery('.vkEdit_column_inner textarea').html();
-		// 	// innerの中のHTMLをテキストエリアの中身に入れかえ
-		// 	// jQuery('.vkEdit_column_inner').unwrapInner('textarea');
-		// });
 
 
 
