@@ -46,7 +46,11 @@
 /*-------------------------------------------*/
 // row
 /*-------------------------------------------*/
+// 行追加編集パネル
 var html_rowEditPanel = '<div class="vkEdit_editPanel_row"><span class="vkEdit_btn vkEdit_btn_addRow">Add Row</span><span class="vkEdit_btn vkEdit_btn_delete">Delete row</span></div>';
+var html_rowDefaultSet = '<div class="row"><div class="col-md-12 column">&nbsp;</div></div>';
+
+
 jQuery('.entry-content .row').each(function(i){
 	jQuery(this).mouseenter(function(){
 
@@ -59,6 +63,10 @@ jQuery('.entry-content .row').each(function(i){
 			// 編集バー表示 
 			jQuery(this).append(html_rowEditPanel);
 			jQuery(this).prepend(html_rowEditPanel);
+
+			jQuery(this).find('.vkEdit_btn_addRow').click(function(){
+				jQuery(this).parent().parent().before(html_rowDefaultSet);
+			});
 
 		}
 	}); // jQuery(this).mouseenter(function(){
