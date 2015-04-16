@@ -44,8 +44,12 @@
 
 // function vkColInnerMouseAction(){
 jQuery('.entry-content .row .column').each(function(i){
+	// アクティブ編集ボタン
+	var html_gridEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden"><span class="vkEdit_btn vkEdit_btn_change">Change</span><span class="vkEdit_btn vkEdit_btn_cancel">Cancel</span></div>';
+	// 非アクティブ編集ボタン
+	var html_gridEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover"><span class="vkEdit_btn vkEdit_btn_edit">Edit</span></div>';
 	// 編集パネルのHTML
-	var html_gridEditPanel_hover = '<div class="vkEdit_editPanel"><span class="vkEdit_btn vkEdit_btn_edit">Edit</span><span class="vkEdit_btn vkEdit_btn_change">Change</span><span class="vkEdit_btn vkEdit_btn_cancel">Cancel</span></div>';
+	var html_gridEditPanel = '<div class="vkEdit_editPanel">'+ html_gridEditPanel_btnSet_hover + html_gridEditPanel_btnSet_active + '</div>';
 	// 対象のカラム識別用クラス
 	// var column_no = 'column_no_' + i;
 	// カラム識別用のクラスとhover識別用クラスを編集に入れる
@@ -64,28 +68,45 @@ jQuery('.entry-content .row .column').each(function(i){
 
 		jQuery(this).wrapInner('<div class="vkEdit_column_inner">');
 		// row内、Add hover panel
-		jQuery(this).children('.vkEdit_column_inner').before( html_gridEditPanel_hover );
+		jQuery(this).children('.vkEdit_column_inner').before( html_gridEditPanel );
 
-		// When click edit action
+		/*-------------------------------------------*/
+		// Edit ボタンが押された時の動作
+		/*-------------------------------------------*/
 		jQuery(this).find('.vkEdit_editPanel .vkEdit_btn_edit').click(function(){
 
 			// カラムにアクティブクラスを追加
 			jQuery('.vkEdit_colmun_hover').addClass('vkEdit_edit_active');
 
+			// 表示するボタンの切り替え
+
+				// 非表示になっているアクティブ（編集）ボタンセットを表示
+				jQuery('.vkEdit_btnSet_active.hidden').removeClass('hidden');
+				// 表示しているホバーボタンセットを非表示に
+				jQuery('.vkEdit_btnSet_hover').addClass('hidden');
+
 			// テキストエリアの中に編集するhtmlを入れる
 			jQuery('.vkEdit_column_inner').wrapInner('<textarea>');
 
+
+			/*-------------------------------------------*/
 			// 編集反映ボタンをクリック
+			/*-------------------------------------------*/
 			jQuery(this).parent().parent().find('.vkEdit_btn_change').click(function(){
-				console.log('_|＼○_ﾋｬｯ ε=＼＿○ﾉ ﾎｰｳ!!_|＼○_ﾋｬｯ ε=＼＿○ﾉ ﾎｰｳ!!');
-			// 	// changeクラスを外してeditクラスに変更。テキストｍEditに戻す
-			// 	// jQuery(this).removeClass('vkEdit_btn_change').addClass('vkEdit_btn_edit').text('Edit');
-			// 	// innerの中のHTMLをテキストエリアの中身に入れかえ
-				var select_editingTextArea = jQuery(this).parent().parent().find('textarea');
+
+				// 表示するボタンの切り替え
+
+					// 非表示になっているホバーボタンセットを表示
+					jQuery('.vkEdit_btnSet_hover.hidden').removeClass('hidden');
+					// 表示しているアクティブボタンセットを非表示に
+					jQuery('.vkEdit_btnSet_active').addClass('hidden');
+
+				// innerの中のHTMLをテキストエリアの中身に入れかえ
+				var select_editingTextArea = jQuery(this).parent().parent().parent().find('textarea');
 				var html_after = select_editingTextArea.html();
+				// textareaを削除
 				select_editingTextArea.before(html_after).remove();
 			});
-
 
 		});
 

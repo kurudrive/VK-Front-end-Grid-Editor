@@ -5,6 +5,10 @@
 
 $panel_color : #333;
 
+
 .vkEdit_column_hover { border:1px solid $panel_color; }
 .vkEdit_editPanel { display:block; overflow:hidden;background-color: $panel_color;padding: 2px 8px; }
 .vkEdit_btn { display:inline-block;padding:2px 5px; margin:0 2px;font-size:10px;line-height: 14px; background-color: #555;color:#f5f5f5;cursor: pointer; }
+.vkEdit_btnSet { display:block; overflow:hidden;float:left; }
+.vkEdit_btnSet.hidden { display: none; }
+.sen { border:1px solid #ff0000;}
