@@ -46,13 +46,28 @@
 /*-------------------------------------------*/
 // row
 /*-------------------------------------------*/
+var html_rowEditPanel = '<div class="vkEdit_editPanel_row"><span class="vkEdit_btn vkEdit_btn_addRow">Add Row</span><span class="vkEdit_btn vkEdit_btn_delete">Delete row</span></div>';
 jQuery('.entry-content .row').each(function(i){
 	jQuery(this).mouseenter(function(){
-		jQuery(this).addClass('vkEdit_row_hover');
-	});
+
+		// ホバー状態でない時
+		if (!jQuery(this).hasClass('vkEdit_row_hover')) {
+
+			// ホバー識別クラス追加
+			jQuery(this).addClass('vkEdit_row_hover');
+
+			// 編集バー表示 
+			jQuery(this).append(html_rowEditPanel);
+			jQuery(this).prepend(html_rowEditPanel);
+
+		}
+	}); // jQuery(this).mouseenter(function(){
 	jQuery(this).mouseleave(function(){
 		jQuery(this).removeClass('vkEdit_row_hover');
-	});
+		jQuery(this).children('.vkEdit_editPanel_row').each(function(){
+			jQuery(this).remove();
+		});
+	}); // jQuery(this).mouseleave(function(){
 });
 
 
@@ -67,7 +82,7 @@ jQuery('.entry-content .row .column').each(function(i){
 	// 非アクティブ編集ボタン
 	var html_gridEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover"><span class="vkEdit_btn vkEdit_btn_edit">Edit</span></div>';
 	// 編集パネルのHTML
-	var html_gridEditPanel = '<div class="vkEdit_editPanel">'+ html_gridEditPanel_btnSet_hover + html_gridEditPanel_btnSet_active + '</div>';
+	var html_gridEditPanel = '<div class="vkEdit_editPanel_col">'+ html_gridEditPanel_btnSet_hover + html_gridEditPanel_btnSet_active + '</div>';
 	// 対象のカラム識別用クラス
 	// var column_no = 'column_no_' + i;
 	// カラム識別用のクラスとhover識別用クラスを編集に入れる
@@ -93,7 +108,7 @@ jQuery('.entry-content .row .column').each(function(i){
 		/*-------------------------------------------*/
 		// Edit ボタンが押された時の動作
 		/*-------------------------------------------*/
-		jQuery(this).find('.vkEdit_editPanel .vkEdit_btn_edit').click(function(){
+		jQuery(this).find('.vkEdit_editPanel_col .vkEdit_btn_edit').click(function(){
 
 			// カラムにアクティブクラスを追加
 			jQuery(this).parent().parent().parent().addClass('vkEdit_edit_active');
@@ -164,7 +179,7 @@ jQuery('.entry-content .row .column').each(function(i){
 			var html_column = jQuery(this).children('.vkEdit_column_inner').html();
 			jQuery(this).html(html_column);
 			// エディットパネルを削除
-			jQuery(this).children('.vkEdit_editPanel').remove();
+			jQuery(this).children('.vkEdit_editPanel_col').remove();
 			// ホバークラスを削除
 			jQuery(this).removeClass(editting_class);
 		}
