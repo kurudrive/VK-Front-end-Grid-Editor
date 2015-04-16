@@ -47,7 +47,7 @@
 // htmlパーツ
 /*-------------------------------------------*/
 // 行追加編集パネル
-var html_rowEditPanel = '<div class="vkEdit_editPanel_row"><span class="vkEdit_btn vkEdit_btn_addRow">Add Row</span><span class="vkEdit_btn vkEdit_btn_delete">Delete row</span></div>';
+var html_rowEditPanel = '<div class="vkEdit_editPanel_row"><span class="vkEdit_btn vkEdit_btn_addRow">Add Row</span><span class="vkEdit_btn vkEdit_btn_delRow">Delete row</span></div>';
 var html_rowDefaultSet = '<div class="row"><div class="col-md-12 column">&nbsp;</div></div>';
 
 // カラムアクティブ編集ボタン
@@ -84,6 +84,7 @@ function vkEdit_row_action(){
 				jQuery(this).prepend(html_rowEditPanel);
 
 				vkEdit_btn_addRow();
+				vkEdit_btn_delRow();
 
 			}
 		}); // jQuery(this).mouseenter(function(){
@@ -104,6 +105,11 @@ function vkEdit_btn_addRow(){
 		jQuery(this).parent().parent().before(html_rowDefaultSet);
 		vkEdit_row_action();
 		vkEdit_col_action();
+	});
+}
+function vkEdit_btn_delRow(){
+	jQuery('.vkEdit_btn_delRow').click(function(){
+		jQuery(this).parent().parent().remove();
 	});
 }
 
