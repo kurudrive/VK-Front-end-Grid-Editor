@@ -51,11 +51,11 @@ var html_rowEditPanel = '<div class="vkEdit_editPanel_row"><span class="vkEdit_b
 var html_rowDefaultSet = '<div class="row"><div class="col-md-12 column">&nbsp;</div></div>';
 
 // カラムアクティブ編集ボタン
-var html_gridEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden"><span class="vkEdit_btn vkEdit_btn_change">Change</span><span class="vkEdit_btn vkEdit_btn_cancel">Cancel</span></div>';
+var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden"><span class="vkEdit_btn vkEdit_btn_change">Change</span><span class="vkEdit_btn vkEdit_btn_cancel">Cancel</span></div>';
 // カラム非アクティブ編集ボタン
-var html_gridEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover"><span class="vkEdit_btn vkEdit_btn_edit">Edit</span></div>';
+var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover"><span class="vkEdit_btn vkEdit_btn_edit">Edit</span></div>';
 // カラム編集パネルのHTML
-var html_gridEditPanel = '<div class="vkEdit_editPanel_col">'+ html_gridEditPanel_btnSet_hover + html_gridEditPanel_btnSet_active + '</div>';
+var html_colEditPanel = '<div class="vkEdit_editPanel_col">'+ html_colEditPanel_btnSet_hover + html_colEditPanel_btnSet_active + '</div>';
 // 対象のカラム識別用クラス
 // var column_no = 'column_no_' + i;
 // カラム識別用のクラスとhover識別用クラスを編集に入れる
@@ -150,7 +150,7 @@ jQuery('.entry-content .row .column').each(function(i){
 
 		jQuery(this).wrapInner('<div class="vkEdit_column_inner">');
 		// row内、Add hover panel
-		jQuery(this).children('.vkEdit_column_inner').before( html_gridEditPanel );
+		jQuery(this).children('.vkEdit_column_inner').before( html_colEditPanel );
 		// editパネルをアニメーションしながら表示
 		jQuery(this).children('.vkEdit_column_inner').prev('.vkEdit_editPanel_col').animate({ 
 			height: "22px",
