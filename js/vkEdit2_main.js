@@ -53,7 +53,7 @@ var html_rowDefaultSet = '<div class="row"><div class="col-md-12 column">&nbsp;<
 // カラムアクティブ編集ボタン
 var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden"><span class="vkEdit_btn vkEdit_btn_change">Change</span><span class="vkEdit_btn vkEdit_btn_cancel">Cancel</span></div>';
 // カラム非アクティブ編集ボタン
-var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover"><span class="vkEdit_btn vkEdit_btn_edit">Edit</span></div>';
+var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover"><span class="vkEdit_btn vkEdit_btn_edit">Edit</span><span class="vkEdit_btn vkEdit_btn_addCol">Add column</span></div>';
 // カラム編集パネルのHTML
 var html_colEditPanel = '<div class="vkEdit_editPanel_col">'+ html_colEditPanel_btnSet_hover + html_colEditPanel_btnSet_active + '</div>';
 // 対象のカラム識別用クラス
@@ -157,6 +157,9 @@ jQuery('.entry-content .row .column').each(function(i){
 			opacity: 1
 		}, 500);
 
+		// カラム追加ボタンが押された時の処理
+		vkEdit_btn_addCol();
+
 		/*-------------------------------------------*/
 		// Edit ボタンが押された時の動作
 		/*-------------------------------------------*/
@@ -243,3 +246,92 @@ jQuery('.entry-content .row .column').each(function(i){
 });
 } // function vkEdit_col_action()
 
+/*-------------------------------------------*/
+// カラム追加ボタンが押された時の処理
+/*-------------------------------------------*/
+function vkEdit_btn_addCol(){
+	jQuery('.vkEdit_btn_addCol').click(function(){
+
+		var select_edittingColumns = jQuery(this).parent().parent().parent();
+
+		// 今ある全部のカラムサイズを取得する
+		var allColSize = new Number(0);
+		// rowの中のカラムをループ
+		jQuery(this).parent().parent().parent().parent().children('.column').each(function(i){
+
+			// 1.カラムのクラスを全て取得
+			var colClass_all = jQuery(this).attr('class');
+			// 2.カラムのクラスを配列に分割
+			var colClass_array = colClass_all.split(" ");
+			// 3.カラムのクラスを順番に回す
+			for (i = 0; i < colClass_array.length; i++) {
+				// クラス名に col-md- が含まれている場合
+				if ( colClass_array[i].match(/col-md-/) ) {
+					// 数字の部分だけを取り出し（１文字ずつ判別するので２桁でも配列になる）
+					var colSize_array = colClass_array[i].match(/[1-9]/g);
+					// カラムのサイズ（配列になってしまったカラムの数字を2桁にするためにくっつける）
+					var colSize = new String();
+					for (i2 = 0; i2 < colSize_array.length; i2++) {
+						colSize += colSize_array[i2];
+					}
+				}
+			}
+			allColSize = allColSize + parseInt(colSize);
+		}); // 今ある全部のカラムサイズを取得
+		console.log('合計のcol:' + allColSize);
+
+
+		// 1.カラムのクラスを全て取得
+		var colClass_all = select_edittingColumns.attr('class');
+		// 2.カラムのクラスを配列に分割
+		var colClass_array = colClass_all.split(" ");
+		// 3.カラムのクラスを順番に回す
+		for (i = 0; i < colClass_array.length; i++) {
+			// クラス名に col-md- が含まれている場合
+			if ( colClass_array[i].match(/col-md-/) ) {
+				// 編集パネルが出ているカラムのサイズクラス
+				var colClass_editting_sizeClass = colClass_array[i];
+				// 数字の部分だけを取り出し（１文字ずつ判別するので２桁でも配列になる）
+				var colSize_array = colClass_array[i].match(/[1-9]/g);
+				// カラムのサイズ（配列になってしまったカラムの数字を2桁にするためにくっつける）
+				var colSize = new String();　
+				for (i2 = 0; i2 < colSize_array.length; i2++) {
+					colSize += colSize_array[i2];
+				}
+				colSize_number = parseInt(colSize);
+			}
+		}
+		console.log('編集中のcol:'+colSize);
+
+		// 12 == 今ある全部のカラムサイズ
+		if ( 12 == allColSize ) {
+			// 操作したカラムサイズ = 操作したカラムサイズ/2
+			// var editColSize = new Number(0);
+			var editColSize = colSize_number / 2;
+			// 追加するカラムサイズ = 操作したカラムサイズ/2
+			var addColSize = colSize_number / 2;
+
+		// 12 > 今ある全部のカラムサイズ
+		} else if ( 12 > allColSize ) {
+			// 追加するカラムサイズ = 12 - 今ある全部のカラムサイズ
+			var addColSize = 12 - allColSize;
+		}
+		// 12 < 今ある全部のカラムサイズ
+			// カラムの数が多すぎるアラート
+
+		// 操作したカラムのサイズクラスを削除・新しいサイズクラスを追加する
+		select_edittingColumns.removeClass(colClass_editting_sizeClass).addClass('col-md-'+editColSize);
+
+		// カラムを追加する
+		var add_row_html = '<div class="col-md-'+ addColSize +' column"></div>';
+		select_edittingColumns.after(add_row_html);
+
+		vkEdit_row_action();
+		vkEdit_col_action();
+	});
+}
+function vkEdit_btn_delCol(){
+	jQuery('.vkEdit_btn_delCol').click(function(){
+		// jQuery(this).parent().parent().remove();
+	});
+}
