@@ -54,6 +54,10 @@
 /*-------------------------------------------*/
 // カラム追加ボタンが押された時の処理
 /*-------------------------------------------*/
+// 保存ボタン表示処理
+		/*-------------------------------------------*/
+		// 保存処理（php側に記載）
+		/*-------------------------------------------*/
 
 
 
@@ -61,6 +65,7 @@
 /*-------------------------------------------*/
 // htmlパーツ
 /*-------------------------------------------*/
+
 
 var btn_row_add 	= '<span class="vkEdit_btn vkEdit_btn_addRow"><i class="fa fa-plus-square"></i> Add</span>';
 var btn_row_del 	= '<span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-times"></i> Del</span>';
@@ -249,6 +254,9 @@ jQuery('.entry-content .row .column').each(function(i){
 				var html_after = select_editingTextArea.val();
 				// textareaを削除
 				select_editingTextArea.before(html_after).remove();
+
+				// 保存ボタンを表示
+				vkEdit_display_masterPanel();
 			});
 
 			/*-------------------------------------------*/
@@ -424,4 +432,18 @@ function vkEdit_btn_delCol(){
 			jQuery(this).parent().parent().parent().remove();
 		}
 	});
+}
+
+/*-------------------------------------------*/
+// 保存ボタン表示処理
+/*-------------------------------------------*/
+function vkEdit_display_masterPanel(){
+	var html_masterPanel = '<div id="vkEdit_masterCtrlPanel" class="vkEdit_masterCtrlPanel row"><div class="col-md-2"><button id="submit" class="button button-primary button-large">SAVE</button></div><div class="col-md-10"><p>Change has not yet been saved.</p></div></div>';
+	if( ! jQuery('.entry-content').prev().hasClass('vkEdit_masterCtrlPanel')){
+		jQuery('.entry-content').before(html_masterPanel);
+		/*-------------------------------------------*/
+		// 保存処理（php側に記載）
+		/*-------------------------------------------*/
+		vkEdit_saveStart();
+	}
 }

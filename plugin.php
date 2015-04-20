@@ -63,26 +63,29 @@ add_action( 'wp_head', 'add_my_ajaxurl', 1 );
 function content_edit() {
 ?>
 <script>
-jQuery('#submit').click(function(){
-	// phpに投げる変数（変更するポストID）
-	<?php global $post; ?>
-	var post_id = '<?php echo $post->ID; ?>';
-    var post_content = jQuery('.entry-content').html();
-    jQuery.ajax({
-        type: 'POST',
-        url: ajaxurl,
-        data: {
-        	// 実行するphp関数
-            'action' : 'ajax_post_update',
-            'post_id' : post_id,
-            'post_content' : post_content,
-        },
-        success: function( response ){
-            jQuery('.entry-content').html(response);
-        }
-    });
-    return false;
-});
+function vkEdit_saveStart(){
+    jQuery('#submit').click(function(){
+        // phpに投げる変数（変更するポストID）
+        <?php global $post; ?>
+        var post_id = '<?php echo $post->ID; ?>';
+        var post_content = jQuery('.entry-content').html();
+        jQuery.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: {
+                // 実行するphp関数
+                'action' : 'ajax_post_update',
+                'post_id' : post_id,
+                'post_content' : post_content,
+            },
+            success: function( response ){
+                jQuery('.entry-content').html(response);
+            }
+        });
+        return false;
+    });  
+}
+
 </script>
 <?php
 }

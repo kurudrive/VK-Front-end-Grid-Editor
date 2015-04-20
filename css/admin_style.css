@@ -3,6 +3,10 @@
 /*-------------------------------------------*/
 header h1 { margin: 0; }
 
+#vkEdit_masterCtrlPanel { border: 1px solid #c00; border-radius: 3px; padding: 10px; margin-bottom: 10px; background-color: #ffe5e5; box-shadow: inset 0px 0px 0px 1px white; }
+#vkEdit_masterCtrlPanel button { padding: 3px 10px; background-color: #c00; color: #fff; border: none; border-radius: 3px; }
+#vkEdit_masterCtrlPanel p { margin-bottom: 0; color: #c00; }
+
 .sen { border: 1px solid #ff0000; }
 
 .vkEdit_btn { display: inline-block; padding: 2px 5px; margin: 0 2px; font-size: 10px; line-height: 14px; background-color: #555; color: #f5f5f5; cursor: pointer; }
