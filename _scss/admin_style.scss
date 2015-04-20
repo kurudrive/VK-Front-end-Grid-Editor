@@ -3,8 +3,8 @@
 
 @import "reset_bootstrap";
 
-$panel_color : #333;
-$rowPanel_color : #900;
+$panel_color : #999;
+$rowPanel_color : #333;
 $col_bg_active : #ffffcc; 
 .sen { border:1px solid #ff0000;}
 
@@ -13,10 +13,10 @@ $col_bg_active : #ffffcc;
 .vkEdit_btnSet.hidden { display: none; }
 
 .vkEdit_row_hover { border:1px solid $rowPanel_color; }
-.vkEdit_editPanel_row { clear:both;display:block; overflow:hidden;background-color: $rowPanel_color;padding: 2px 8px;height:0; }
+.vkEdit_editPanel_row { clear:both;display:block; overflow:hidden;background-color: $rowPanel_color;padding: 0 23px;height:0; }
 
 .vkEdit_column_hover { background-color: $col_bg_active }
-.vkEdit_editPanel_col { clear:both;display:block; overflow:hidden;background-color: $panel_color;padding: 2px 8px;height:0;  }
+.vkEdit_editPanel_col { clear:both;display:block; overflow:hidden;background-color: $panel_color;padding: 0 8px;height:0;  }
 .vkEdit_column_active textarea { display:block; overflow:hidden;width: 100%;padding: 0; }
 
 // .column { border:1px dotted #333;margin:1px; }

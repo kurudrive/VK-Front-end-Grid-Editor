@@ -47,13 +47,13 @@
 // htmlパーツ
 /*-------------------------------------------*/
 // 行追加編集パネル
-var html_rowEditPanel = '<div class="vkEdit_editPanel_row"><span class="vkEdit_btn vkEdit_btn_addRow">Add Row</span><span class="vkEdit_btn vkEdit_btn_delRow">Delete row</span></div>';
+var html_rowEditPanel = '<div class="vkEdit_editPanel_row"><span class="vkEdit_btn vkEdit_btn_addRow"><i class="fa fa-plus-square"></i> Add Row</span><span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-times"></i> Delete row</span></div>';
 var html_rowDefaultSet = '<div class="row"><div class="col-sm-12 column">&nbsp;</div></div>';
 
 // カラムアクティブ編集ボタン
-var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden"><span class="vkEdit_btn vkEdit_btn_change">Change</span><span class="vkEdit_btn vkEdit_btn_cancel">Cancel</span></div>';
+var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden"><span class="vkEdit_btn vkEdit_btn_change"><i class="fa fa-check-square"></i> Change</span><span class="vkEdit_btn vkEdit_btn_cancel"><i class="fa fa-undo"></i> Cancel</span></div>';
 // カラム非アクティブ編集ボタン
-var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover"><span class="vkEdit_btn vkEdit_btn_edit">Edit</span><span class="vkEdit_btn vkEdit_btn_addCol">Add column</span></div>';
+var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover"><span class="vkEdit_btn vkEdit_btn_edit"><i class="fa fa-pencil"></i> Edit</span><span class="vkEdit_btn vkEdit_btn_addCol"><i class="fa fa-plus-square"></i> Add column</span></div>';
 // カラム編集パネルのHTML
 var html_colEditPanel = '<div class="vkEdit_editPanel_col">'+ html_colEditPanel_btnSet_hover + html_colEditPanel_btnSet_active + '</div>';
 // 対象のカラム識別用クラス

@@ -33,9 +33,17 @@ function vkEdit2_scripts(){
 /*-------------------------------------------*/
 function vkEdit2_style_setup(){
     wp_enqueue_style( 'vkEdit2_style_setup_load_admin_css', plugins_url('css/admin_style.css', __FILE__) , false, '2015-04-13');
-    wp_enqueue_style( 'vkEdit2_style_setup_load_bootstrap_css', plugins_url('css/bootstrap.min.css', __FILE__) , false, '2015-04-19');
+    wp_enqueue_style( 'vkEdit2_style_setup_load_awesome_css', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' , false);
 }
 add_action('wp_head', 'vkEdit2_style_setup');
+
+/*-------------------------------------------*/
+/* フロント用CSSファイルの読み込み
+/*-------------------------------------------*/
+function vkEdit2_front_style_setup(){
+    wp_enqueue_style( 'vkEdit2_style_setup_load_bootstrap_css', plugins_url('css/bootstrap.min.css', __FILE__) , false, '2015-04-19');
+}
+add_action('wp_head', 'vkEdit2_front_style_setup');
 
 /*-------------------------------------------*/
 /* ajax _ URLを取得・設定

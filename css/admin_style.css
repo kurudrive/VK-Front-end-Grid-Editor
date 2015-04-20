@@ -11,12 +11,12 @@ header h1 { margin: 0; }
 
 .vkEdit_btnSet.hidden { display: none; }
 
-.vkEdit_row_hover { border: 1px solid #900; }
+.vkEdit_row_hover { border: 1px solid #333; }
 
-.vkEdit_editPanel_row { clear: both; display: block; overflow: hidden; background-color: #900; padding: 2px 8px; height: 0; }
+.vkEdit_editPanel_row { clear: both; display: block; overflow: hidden; background-color: #333; padding: 0 23px; height: 0; }
 
 .vkEdit_column_hover { background-color: #ffffcc; }
 
-.vkEdit_editPanel_col { clear: both; display: block; overflow: hidden; background-color: #333; padding: 2px 8px; height: 0; }
+.vkEdit_editPanel_col { clear: both; display: block; overflow: hidden; background-color: #999; padding: 0 8px; height: 0; }
 
 .vkEdit_column_active textarea { display: block; overflow: hidden; width: 100%; padding: 0; }
