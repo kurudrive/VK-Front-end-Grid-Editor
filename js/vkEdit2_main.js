@@ -290,7 +290,6 @@ jQuery('.entry-content .row .column').each(function(i){
 			// カラムからホバークラスを削除
 			jQuery(this).removeClass(editting_class);
 		} // if(!jQuery(this).hasClass('vkEdit_column_active')){
-
 	}); //jQuery(this).mouseleave(function(){
 
 });
@@ -304,7 +303,18 @@ function vkEdit_btn_changeCol(){
 	jQuery('.vkEdit_btnSet_size .vkEdit_btn_colSize').click(function(){
 		// 親セレクタを定義
 		var select_current_column = jQuery(this).parent().parent().parent().parent();
-		select_current_column.removeClass('col-sm-12').removeClass('col-sm-9').removeClass('col-sm-8').removeClass('col-sm-6').removeClass('col-sm-4').removeClass('col-sm-3');
+		// 1.カラムのクラスを全て取得
+		var colClass_all = select_current_column.attr('class');
+		// 2.カラムのクラスを配列に分割
+		var colClass_array = colClass_all.split(" ");
+		// 3.カラムのクラスを順番に回す
+		for (i = 0; i < colClass_array.length; i++) {
+			// クラス名に col-sm- が含まれている場合
+			if ( colClass_array[i].match(/col-sm-/) ) {
+				// クラスを削除
+				select_current_column.removeClass(colClass_array[i]);
+			}
+		}
 		if ( jQuery(this).hasClass('vkEdit_btn_sm12') ) {
 			select_current_column.addClass('col-sm-12');
 		} else if ( jQuery(this).hasClass('vkEdit_btn_sm9') ) {
