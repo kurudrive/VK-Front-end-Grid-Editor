@@ -34,7 +34,9 @@
 /*-------------------------------------------*/
 // row の基本処理
 /*-------------------------------------------*/
-// row追加ボタンが押された時の処理
+// row 追加ボタンが押された時の処理
+/*-------------------------------------------*/
+// row 削除ボタンが押された時の処理
 /*-------------------------------------------*/
 // カラム
 	/*-------------------------------------------*/
@@ -134,7 +136,7 @@ function vkEdit_row_action(){
 }
 
 /*-------------------------------------------*/
-// row追加ボタンが押された時の処理
+// row 追加ボタンが押された時の処理
 /*-------------------------------------------*/
 function vkEdit_btn_addRow(){
 	jQuery('.vkEdit_btn_addRow').click(function(){
@@ -143,9 +145,14 @@ function vkEdit_btn_addRow(){
 		vkEdit_col_action();
 	});
 }
+/*-------------------------------------------*/
+// row 削除ボタンが押された時の処理
+/*-------------------------------------------*/
 function vkEdit_btn_delRow(){
 	jQuery('.vkEdit_btn_delRow').click(function(){
-		jQuery(this).parent().parent().remove();
+		if (confirm("Are you sure?")) {
+			jQuery(this).parent().parent().remove();
+		}
 	});
 }
 
@@ -357,6 +364,8 @@ function vkEdit_btn_addCol(){
 }
 function vkEdit_btn_delCol(){
 	jQuery('.vkEdit_btn_delCol').click(function(){
-		jQuery(this).parent().parent().parent().remove();
+		if (confirm("Are you sure?")) {
+			jQuery(this).parent().parent().parent().remove();
+		}
 	});
 }
