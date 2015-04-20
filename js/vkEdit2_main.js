@@ -323,7 +323,7 @@ function vkEdit_btn_addCol(){
 		select_edittingColumns.removeClass(colClass_editting_sizeClass).addClass('col-sm-'+editColSize);
 
 		// カラムを追加する
-		var add_row_html = '<div class="col-sm-'+ addColSize +' column"></div>';
+		var add_row_html = '<div class="col-sm-'+ addColSize +' column">&nbsp;</div>';
 		select_edittingColumns.after(add_row_html);
 
 		vkEdit_row_action();
