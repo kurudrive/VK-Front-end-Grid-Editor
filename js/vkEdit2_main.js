@@ -11,7 +11,7 @@
 			// .row がなかったら
 				// Use Grid ボタンを表示
 					// Use Grid ボタンが押されたら
-						// .rowを付与＆内側に div.col-md-12 を追加
+						// .rowを付与＆内側に div.col-sm-12 を追加
 		// divからmouseout したら
 			// 編集なび
 
@@ -48,7 +48,7 @@
 /*-------------------------------------------*/
 // 行追加編集パネル
 var html_rowEditPanel = '<div class="vkEdit_editPanel_row"><span class="vkEdit_btn vkEdit_btn_addRow">Add Row</span><span class="vkEdit_btn vkEdit_btn_delRow">Delete row</span></div>';
-var html_rowDefaultSet = '<div class="row"><div class="col-md-12 column">&nbsp;</div></div>';
+var html_rowDefaultSet = '<div class="row"><div class="col-sm-12 column">&nbsp;</div></div>';
 
 // カラムアクティブ編集ボタン
 var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden"><span class="vkEdit_btn vkEdit_btn_change">Change</span><span class="vkEdit_btn vkEdit_btn_cancel">Cancel</span></div>';
@@ -265,8 +265,8 @@ function vkEdit_btn_addCol(){
 			var colClass_array = colClass_all.split(" ");
 			// 3.カラムのクラスを順番に回す
 			for (i = 0; i < colClass_array.length; i++) {
-				// クラス名に col-md- が含まれている場合
-				if ( colClass_array[i].match(/col-md-/) ) {
+				// クラス名に col-sm- が含まれている場合
+				if ( colClass_array[i].match(/col-sm-/) ) {
 					// 数字の部分だけを取り出し（１文字ずつ判別するので２桁でも配列になる）
 					var colSize_array = colClass_array[i].match(/[1-9]/g);
 					// カラムのサイズ（配列になってしまったカラムの数字を2桁にするためにくっつける）
@@ -287,8 +287,8 @@ function vkEdit_btn_addCol(){
 		var colClass_array = colClass_all.split(" ");
 		// 3.カラムのクラスを順番に回す
 		for (i = 0; i < colClass_array.length; i++) {
-			// クラス名に col-md- が含まれている場合
-			if ( colClass_array[i].match(/col-md-/) ) {
+			// クラス名に col-sm- が含まれている場合
+			if ( colClass_array[i].match(/col-sm-/) ) {
 				// 編集パネルが出ているカラムのサイズクラス
 				var colClass_editting_sizeClass = colClass_array[i];
 				// 数字の部分だけを取り出し（１文字ずつ判別するので２桁でも配列になる）
@@ -320,10 +320,10 @@ function vkEdit_btn_addCol(){
 			// カラムの数が多すぎるアラート
 
 		// 操作したカラムのサイズクラスを削除・新しいサイズクラスを追加する
-		select_edittingColumns.removeClass(colClass_editting_sizeClass).addClass('col-md-'+editColSize);
+		select_edittingColumns.removeClass(colClass_editting_sizeClass).addClass('col-sm-'+editColSize);
 
 		// カラムを追加する
-		var add_row_html = '<div class="col-md-'+ addColSize +' column"></div>';
+		var add_row_html = '<div class="col-sm-'+ addColSize +' column"></div>';
 		select_edittingColumns.after(add_row_html);
 
 		vkEdit_row_action();
