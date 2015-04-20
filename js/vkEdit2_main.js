@@ -30,30 +30,51 @@
 
 
 /*-------------------------------------------*/
+// htmlパーツ
+/*-------------------------------------------*/
+// row の基本処理
+/*-------------------------------------------*/
+// row追加ボタンが押された時の処理
+/*-------------------------------------------*/
+// カラム
+	/*-------------------------------------------*/
+	// カラムにマウスオーバーしたら
+		/*-------------------------------------------*/
+		// Edit ボタンが押された時の動作
+			/*-------------------------------------------*/
+			// 編集反映ボタンをクリック
+			/*-------------------------------------------*/
+			// キャンセルボタンをクリック
+	/*-------------------------------------------*/
+	// カラムからマウスアウトしたら
+/*-------------------------------------------*/
+// カラム追加ボタンが押された時の処理
+/*-------------------------------------------*/
 
 
-/*-------------------------------------------*/
-/* エディターの起動
-/*-------------------------------------------*/
-/*-------------------------------------------*/
-/*	vkColInner mouse action
-/*-------------------------------------------*/
-// setTimeout(function(){
-// 	vkColInnerMouseAction();
-// },500);
 
 
 /*-------------------------------------------*/
 // htmlパーツ
 /*-------------------------------------------*/
+
+var btn_row_add 	= '<span class="vkEdit_btn vkEdit_btn_addRow"><i class="fa fa-plus-square"></i> Add</span>';
+var btn_row_del 	= '<span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-times"></i> Del</span>';
+var btn_col_edit 	= '<span class="vkEdit_btn vkEdit_btn_edit"><i class="fa fa-pencil"></i> Edit</span>';
+var btn_col_add 	= '<span class="vkEdit_btn vkEdit_btn_addCol"><i class="fa fa-plus-square"></i> Add</span>';
+var btn_col_del 	= '<span class="vkEdit_btn vkEdit_btn_delCol"><i class="fa fa-times"></i> Del</span>';
+var btn_col_change 	= '<span class="vkEdit_btn vkEdit_btn_change"><i class="fa fa-check-square"></i> Change</span>';
+var btn_col_chancel = '<span class="vkEdit_btn vkEdit_btn_cancel"><i class="fa fa-undo"></i> Cancel</span>';
+
 // 行追加編集パネル
-var html_rowEditPanel = '<div class="vkEdit_editPanel_row"><span class="vkEdit_btn vkEdit_btn_addRow"><i class="fa fa-plus-square"></i> Add Row</span><span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-times"></i> Delete row</span></div>';
+var html_rowEditPanel = '<div class="vkEdit_editPanel_row">' + btn_row_add + btn_row_del + '</div>';
 var html_rowDefaultSet = '<div class="row"><div class="col-sm-12 column">&nbsp;</div></div>';
 
+
 // カラムアクティブ編集ボタン
-var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden"><span class="vkEdit_btn vkEdit_btn_change"><i class="fa fa-check-square"></i> Change</span><span class="vkEdit_btn vkEdit_btn_cancel"><i class="fa fa-undo"></i> Cancel</span></div>';
+var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden">'+ btn_col_change + btn_col_chancel + '</div>';
 // カラム非アクティブ編集ボタン
-var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover"><span class="vkEdit_btn vkEdit_btn_edit"><i class="fa fa-pencil"></i> Edit</span><span class="vkEdit_btn vkEdit_btn_addCol"><i class="fa fa-plus-square"></i> Add column</span></div>';
+var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover">' + btn_col_edit + btn_col_add + btn_col_del + '</div>';
 // カラム編集パネルのHTML
 var html_colEditPanel = '<div class="vkEdit_editPanel_col">'+ html_colEditPanel_btnSet_hover + html_colEditPanel_btnSet_active + '</div>';
 // 対象のカラム識別用クラス
@@ -159,6 +180,8 @@ jQuery('.entry-content .row .column').each(function(i){
 
 		// カラム追加ボタンが押された時の処理
 		vkEdit_btn_addCol();
+		// カラム削除ボタンが押された時の処理
+		vkEdit_btn_delCol();
 
 		/*-------------------------------------------*/
 		// Edit ボタンが押された時の動作
@@ -313,6 +336,8 @@ function vkEdit_btn_addCol(){
 
 		// 12 > 今ある全部のカラムサイズ
 		} else if ( 12 > allColSize ) {
+			// 操作したカラムサイズ = そのまま
+			var editColSize = colSize_number;
 			// 追加するカラムサイズ = 12 - 今ある全部のカラムサイズ
 			var addColSize = 12 - allColSize;
 		}
@@ -332,6 +357,6 @@ function vkEdit_btn_addCol(){
 }
 function vkEdit_btn_delCol(){
 	jQuery('.vkEdit_btn_delCol').click(function(){
-		// jQuery(this).parent().parent().remove();
+		jQuery(this).parent().parent().parent().remove();
 	});
 }
