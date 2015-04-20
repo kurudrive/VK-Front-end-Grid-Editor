@@ -17,6 +17,7 @@ header h1 { margin: 0; }
 
 .vkEdit_column_hover { background-color: #ffffcc; }
 
-.vkEdit_editPanel_col { clear: both; display: block; overflow: hidden; background-color: #999; padding: 0 8px; height: 0; }
+.vkEdit_editPanel_col { clear: both; display: block; overflow: hidden; background-color: #999; padding: 0 8px; }
+.vkEdit_editPanel_col .vkEdit_btnSet_size { float: none; clear: both; }
 
 .vkEdit_column_active textarea { display: block; overflow: hidden; width: 100%; padding: 0; }

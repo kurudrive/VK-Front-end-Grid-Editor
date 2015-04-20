@@ -50,6 +50,8 @@
 	/*-------------------------------------------*/
 	// カラムからマウスアウトしたら
 /*-------------------------------------------*/
+// カラムサイズ変更ボタンが押された時の処理
+/*-------------------------------------------*/
 // カラム追加ボタンが押された時の処理
 /*-------------------------------------------*/
 
@@ -62,23 +64,38 @@
 
 var btn_row_add 	= '<span class="vkEdit_btn vkEdit_btn_addRow"><i class="fa fa-plus-square"></i> Add</span>';
 var btn_row_del 	= '<span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-times"></i> Del</span>';
-var btn_col_edit 	= '<span class="vkEdit_btn vkEdit_btn_edit"><i class="fa fa-pencil"></i> Edit</span>';
-var btn_col_add 	= '<span class="vkEdit_btn vkEdit_btn_addCol"><i class="fa fa-plus-square"></i> Add</span>';
-var btn_col_del 	= '<span class="vkEdit_btn vkEdit_btn_delCol"><i class="fa fa-times"></i> Del</span>';
-var btn_col_change 	= '<span class="vkEdit_btn vkEdit_btn_change"><i class="fa fa-check-square"></i> Change</span>';
-var btn_col_chancel = '<span class="vkEdit_btn vkEdit_btn_cancel"><i class="fa fa-undo"></i> Cancel</span>';
 
 // 行追加編集パネル
 var html_rowEditPanel = '<div class="vkEdit_editPanel_row">' + btn_row_add + btn_row_del + '</div>';
 var html_rowDefaultSet = '<div class="row"><div class="col-sm-12 column">&nbsp;</div></div>';
 
 
-// カラムアクティブ編集ボタン
+var btn_col_edit 	= '<span class="vkEdit_btn vkEdit_btn_edit"><i class="fa fa-pencil"></i> Edit</span>';
+var btn_col_add 	= '<span class="vkEdit_btn vkEdit_btn_addCol"><i class="fa fa-plus-square"></i> Add</span>';
+var btn_col_del 	= '<span class="vkEdit_btn vkEdit_btn_delCol"><i class="fa fa-times"></i> Del</span>';
+var btn_col_change 	= '<span class="vkEdit_btn vkEdit_btn_change"><i class="fa fa-check-square"></i> Change</span>';
+var btn_col_chancel = '<span class="vkEdit_btn vkEdit_btn_cancel"><i class="fa fa-undo"></i> Cancel</span>';
+// カラムボタン
+var btn_col_sm12	= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm12">12/12</span>';
+var btn_col_sm9		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm9">9/12</span>';
+var btn_col_sm8		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm8">8/12</span>';
+var btn_col_sm6		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm6">6/12</span>';
+var btn_col_sm4		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm4">4/12</span>';
+var btn_col_sm3		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm3">3/12</span>';
+
+// カラムサイズボタンセット
+var html_colEditPanel_btnSet_size = '<div class="vkEdit_btnSet_size">'+ btn_col_sm12 + btn_col_sm9 + btn_col_sm8 + btn_col_sm6 + btn_col_sm4 + btn_col_sm3 +'</div>';
+// カラムアクティブ編集ボタン（ [変更][ キャンセル ] + カラムサイズボタンセット）
 var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden">'+ btn_col_change + btn_col_chancel + '</div>';
 // カラム非アクティブ編集ボタン
-var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover">' + btn_col_edit + btn_col_add + btn_col_del + '</div>';
+var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover">' + btn_col_edit + btn_col_add + btn_col_del + html_colEditPanel_btnSet_size + '</div>'
+
+
 // カラム編集パネルのHTML
 var html_colEditPanel = '<div class="vkEdit_editPanel_col">'+ html_colEditPanel_btnSet_hover + html_colEditPanel_btnSet_active + '</div>';
+
+
+
 // 対象のカラム識別用クラス
 // var column_no = 'column_no_' + i;
 // カラム識別用のクラスとhover識別用クラスを編集に入れる
@@ -181,7 +198,7 @@ jQuery('.entry-content .row .column').each(function(i){
 		jQuery(this).children('.vkEdit_column_inner').before( html_colEditPanel );
 		// editパネルをアニメーションしながら表示
 		jQuery(this).children('.vkEdit_column_inner').prev('.vkEdit_editPanel_col').animate({ 
-			height: "22px",
+			// height: "44px",
 			opacity: 1
 		}, 500);
 
@@ -189,6 +206,8 @@ jQuery('.entry-content .row .column').each(function(i){
 		vkEdit_btn_addCol();
 		// カラム削除ボタンが押された時の処理
 		vkEdit_btn_delCol();
+		// カラムサイズ変更ボタンが押された時の処理
+		vkEdit_btn_changeCol();
 
 		/*-------------------------------------------*/
 		// Edit ボタンが押された時の動作
@@ -197,6 +216,7 @@ jQuery('.entry-content .row .column').each(function(i){
 
 			// カラムにアクティブクラスを追加
 			jQuery(this).parent().parent().parent().addClass('vkEdit_column_active');
+			jQuery(this).parent().parent().css("height","inherit");
 
 			// 表示するボタンの切り替え
 
@@ -275,6 +295,32 @@ jQuery('.entry-content .row .column').each(function(i){
 
 });
 } // function vkEdit_col_action()
+
+
+/*-------------------------------------------*/
+// カラムサイズ変更ボタンが押された時の処理
+/*-------------------------------------------*/
+function vkEdit_btn_changeCol(){
+	jQuery('.vkEdit_btnSet_size .vkEdit_btn_colSize').click(function(){
+		// 親セレクタを定義
+		var select_current_column = jQuery(this).parent().parent().parent().parent();
+		select_current_column.removeClass('col-sm-12').removeClass('col-sm-9').removeClass('col-sm-8').removeClass('col-sm-6').removeClass('col-sm-4').removeClass('col-sm-3');
+		if ( jQuery(this).hasClass('vkEdit_btn_sm12') ) {
+			select_current_column.addClass('col-sm-12');
+		} else if ( jQuery(this).hasClass('vkEdit_btn_sm9') ) {
+			select_current_column.addClass('col-sm-9');
+		} else if ( jQuery(this).hasClass('vkEdit_btn_sm8') ) {
+			select_current_column.addClass('col-sm-8');
+		} else if ( jQuery(this).hasClass('vkEdit_btn_sm6') ) {
+			select_current_column.addClass('col-sm-6');
+		} else if ( jQuery(this).hasClass('vkEdit_btn_sm4') ) {
+			select_current_column.addClass('col-sm-4');
+		} else if ( jQuery(this).hasClass('vkEdit_btn_sm3') ) {
+			select_current_column.addClass('col-sm-3');
+		}
+	});
+}
+
 
 /*-------------------------------------------*/
 // カラム追加ボタンが押された時の処理
