@@ -18,7 +18,7 @@ header h1 { margin: 0; }
 
 .vkEdit_btnSet.hidden { display: none; }
 
-.vkEdit_row_hover { border: 1px solid #333; }
+.vkEdit_row_hover { background-color: #dff0d8; }
 
 .vkEdit_editPanel_row { clear: both; display: block; overflow: hidden; background-color: #333; padding: 0 23px; height: 0; }
 

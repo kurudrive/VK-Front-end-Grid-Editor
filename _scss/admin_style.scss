@@ -24,7 +24,7 @@ $col_bg_active : #ffffcc;
 .vkEdit_btnSet { display:block; overflow:hidden;float:left; }
 .vkEdit_btnSet.hidden { display: none; }
 
-.vkEdit_row_hover { border:1px solid $rowPanel_color; }
+.vkEdit_row_hover { background-color: #dff0d8; }
 .vkEdit_editPanel_row { clear:both;display:block; overflow:hidden;background-color: $rowPanel_color;padding: 0 23px;height:0; }
 
 .vkEdit_column_hover { background-color: $col_bg_active }

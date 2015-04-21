@@ -56,11 +56,12 @@ jQuery(document).ready(function($){
 
 var class_columns	= '.col-sm-12,.col-sm-11,.col-sm-10,.col-sm-9,.col-sm-9,.col-sm-7,.col-sm-6,.col-sm-5,.col-sm-4,.col-sm-3,.col-sm-2,.col-sm-1,'
 
-var btn_row_add 	= '<span class="vkEdit_btn vkEdit_btn_addRow"><i class="fa fa-plus-square"></i> Add</span>';
+var btn_row_add_up 		= '<span class="vkEdit_btn vkEdit_btn_addRow vkEdit_btn_addRow_up"><i class="fa fa-caret-square-o-up"></i> + Add Row</span>';
+var btn_row_add_down 	= '<span class="vkEdit_btn vkEdit_btn_addRow vkEdit_btn_addRow_down"><i class="fa fa-caret-square-o-down"></i> + Add Row</span>';
 var btn_row_del 	= '<span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-times"></i> Del</span>';
 
 // 行追加編集パネル
-var html_rowEditPanel = '<div class="vkEdit_editPanel_row  vkEdit_no_add_row">' + btn_row_add + btn_row_del + '</div>';
+var html_rowEditPanel = '<div class="vkEdit_editPanel_row  vkEdit_no_add_row">' + btn_row_add_up + btn_row_add_down + btn_row_del + '</div>';
 var html_rowDefaultSet = '<div class="row"><div class="col-sm-12 column">Input here.</div></div>';
 
 /*-------------------------------------------*/
@@ -77,7 +78,7 @@ function vkEdit_row_action(){
 
 				// 編集バー表示
 				// 編集バーを前後に追加した後でアニメーション
-				jQuery(this).append(html_rowEditPanel).prepend(html_rowEditPanel).children('.vkEdit_editPanel_row').each(function(){
+				jQuery(this).prepend(html_rowEditPanel).children('.vkEdit_editPanel_row').each(function(){
 					jQuery(this).animate({ 
 						height: "22px",
 						opacity: 1
@@ -112,10 +113,17 @@ function vkEdit_row_action(){
 // row 追加ボタンが押された時の処理
 /*-------------------------------------------*/
 function vkEdit_btn_addRow(){
-	jQuery('.vkEdit_btn_addRow').click(function(){
+	jQuery('.vkEdit_btn_addRow_up').click(function(){
 		jQuery(this).parent().parent().before(html_rowDefaultSet);
 		vkEdit_row_action();
 		vkEdit_col_action();
+		vkEdit_display_masterPanel();
+	});
+	jQuery('.vkEdit_btn_addRow_down').click(function(){
+		jQuery(this).parent().parent().after(html_rowDefaultSet);
+		vkEdit_row_action();
+		vkEdit_col_action();
+		vkEdit_display_masterPanel();
 	});
 }
 /*-------------------------------------------*/
@@ -449,7 +457,6 @@ function vkEdit_rowWrapBtn_display(){
 				}
 			});
 	});
-
 }
 
 /*-------------------------------------------*/
