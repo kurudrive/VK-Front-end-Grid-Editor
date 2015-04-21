@@ -68,7 +68,7 @@ function vkEdit_saveStart(){
         // phpに投げる変数（変更するポストID）
         <?php global $post; ?>
         var post_id = '<?php echo $post->ID; ?>';
-        var post_content = jQuery('.entry-content').html();
+        var post_content = jQuery('#vkEdit_editWrap').html();
         jQuery.ajax({
             type: 'POST',
             url: ajaxurl,
