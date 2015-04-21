@@ -61,7 +61,7 @@ var btn_row_del 	= '<span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-t
 
 // 行追加編集パネル
 var html_rowEditPanel = '<div class="vkEdit_editPanel_row  vkEdit_no_add_row">' + btn_row_add + btn_row_del + '</div>';
-var html_rowDefaultSet = '<div class="row"><div class="col-sm-12 column">&nbsp;</div></div>';
+var html_rowDefaultSet = '<div class="row"><div class="col-sm-12 column">Input here.</div></div>';
 
 /*-------------------------------------------*/
 // row の基本処理
@@ -398,7 +398,7 @@ function vkEdit_btn_addCol(){
 		select_edittingColumns.removeClass(colClass_editting_sizeClass).addClass('col-sm-'+editColSize);
 
 		// カラムを追加する
-		var add_row_html = '<div class="col-sm-'+ addColSize +' column">&nbsp;</div>';
+		var add_row_html = '<div class="col-sm-'+ addColSize +' column">Input here.</div>';
 		select_edittingColumns.after(add_row_html);
 
 		vkEdit_row_action();
