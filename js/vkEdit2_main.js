@@ -210,9 +210,8 @@ jQuery('#vkEdit_editWrap .row .column').each(function(i){
 				// 表示しているホバーボタンセットを非表示に
 				jQuery('.vkEdit_btnSet_hover').addClass('hidden');
 
-			// テキストエリアの中に編集するhtmlを入れる
-			jQuery('.vkEdit_column_inner').wrapInner('<textarea>');
-
+			// テキストエリアの中に編集するhtmlを入れる（wrapInnerだとタグを入れられてる場合にうまく表示できない）
+			jQuery('.vkEdit_column_inner').html('<textarea>' + html_before + '</textarea>');
 
 			/*-------------------------------------------*/
 			// 編集反映ボタンをクリック
