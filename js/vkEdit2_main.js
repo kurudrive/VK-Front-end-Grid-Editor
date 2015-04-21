@@ -62,7 +62,7 @@ var btn_row_del 	= '<span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-t
 
 // 行追加編集パネル
 var html_rowEditPanel = '<div class="vkEdit_editPanel_row  vkEdit_no_add_row">' + btn_row_add_up + btn_row_add_down + btn_row_del + '</div>';
-var html_rowDefaultSet = '<div class="row"><div class="col-sm-12 column">Input here.</div></div>';
+var html_rowDefaultSet = '<div class="row"><div class="col-sm-12">Input here.</div></div>';
 
 /*-------------------------------------------*/
 // row の基本処理
@@ -172,120 +172,127 @@ var editting_class = 'vkEdit_column_hover';
 
 function vkEdit_col_action(){
 // function vkColInnerMouseAction(){
-jQuery('#vkEdit_editWrap .row .column').each(function(i){
+jQuery('#vkEdit_editWrap .row div').each(function(i){
 
-	/*-------------------------------------------*/
-	// カラムにマウスオーバーしたら
-	/*-------------------------------------------*/
-	jQuery(this).mouseenter(function(){
-	// カラムが既にホバー状態じゃない時
-	if (!jQuery(this).hasClass('vkEdit_column_hover')) {
-		// カラムにホバー識別クラス追加
-		jQuery(this).addClass(editting_class);
-		// カラム内のHTMLを格納
-		var html_before = jQuery(this).html();
-		// columnの中をhtml改変用のdivで囲う
-
-		jQuery(this).wrapInner('<div class="vkEdit_column_inner">');
-		// row内、Add hover panel
-		jQuery(this).children('.vkEdit_column_inner').before( html_colEditPanel );
-		// editパネルをアニメーションしながら表示
-		jQuery(this).children('.vkEdit_column_inner').prev('.vkEdit_editPanel_col').animate({ 
-			// height: "44px",
-			opacity: 1
-		}, 500);
-
-		// カラム追加ボタンが押された時の処理
-		vkEdit_btn_addCol();
-		// カラム削除ボタンが押された時の処理
-		vkEdit_btn_delCol();
-		// カラムサイズ変更ボタンが押された時の処理
-		vkEdit_btn_changeCol();
+	// カラムのクラスを全て取得
+	var colClass_all = jQuery(this).attr('class');
+	// クラス名に col- が含まれている場合
+	if ( colClass_all.match(/col-/) ) {
 
 		/*-------------------------------------------*/
-		// Edit ボタンが押された時の動作
+		// カラムにマウスオーバーしたら
 		/*-------------------------------------------*/
-		jQuery(this).find('.vkEdit_editPanel_col .vkEdit_btn_edit').click(function(){
+		jQuery(this).mouseenter(function(){
+		// カラムが既にホバー状態じゃない時
+		if (!jQuery(this).hasClass('vkEdit_column_hover')) {
+			// カラムにホバー識別クラス追加
+			jQuery(this).addClass(editting_class);
+			// カラム内のHTMLを格納
+			var html_before = jQuery(this).html();
+			// columnの中をhtml改変用のdivで囲う
 
-			// カラムにアクティブクラスを追加
-			jQuery(this).parent().parent().parent().addClass('vkEdit_column_active');
-			jQuery(this).parent().parent().css("height","inherit");
+			jQuery(this).wrapInner('<div class="vkEdit_column_inner">');
+			// row内、Add hover panel
+			jQuery(this).children('.vkEdit_column_inner').before( html_colEditPanel );
+			// editパネルをアニメーションしながら表示
+			jQuery(this).children('.vkEdit_column_inner').prev('.vkEdit_editPanel_col').animate({ 
+				// height: "44px",
+				opacity: 1
+			}, 500);
 
-			// 表示するボタンの切り替え
-
-				// 非表示になっているアクティブ（編集）ボタンセットを表示
-				jQuery('.vkEdit_btnSet_active.hidden').removeClass('hidden');
-				// 表示しているホバーボタンセットを非表示に
-				jQuery('.vkEdit_btnSet_hover').addClass('hidden');
-
-			// テキストエリアの中に編集するhtmlを入れる（wrapInnerだとタグを入れられてる場合にうまく表示できない）
-			jQuery('.vkEdit_column_inner').html('<textarea>' + html_before + '</textarea>');
+			// カラム追加ボタンが押された時の処理
+			vkEdit_btn_addCol();
+			// カラム削除ボタンが押された時の処理
+			vkEdit_btn_delCol();
+			// カラムサイズ変更ボタンが押された時の処理
+			vkEdit_btn_changeCol();
 
 			/*-------------------------------------------*/
-			// 編集反映ボタンをクリック
+			// Edit ボタンが押された時の動作
 			/*-------------------------------------------*/
-			jQuery(this).parent().parent().find('.vkEdit_btn_change').click(function(){
+			jQuery(this).find('.vkEdit_editPanel_col .vkEdit_btn_edit').click(function(){
 
-				// カラムからアクティブクラスを削除
-				jQuery(this).parent().parent().parent().removeClass('vkEdit_column_active');
+				// カラムにアクティブクラスを追加
+				jQuery(this).parent().parent().parent().addClass('vkEdit_column_active');
+				jQuery(this).parent().parent().css("height","inherit");
 
 				// 表示するボタンの切り替え
 
-					// 非表示になっているホバーボタンセットを表示
-					jQuery('.vkEdit_btnSet_hover.hidden').removeClass('hidden');
-					// 表示しているアクティブボタンセットを非表示に
-					jQuery('.vkEdit_btnSet_active').addClass('hidden');
+					// 非表示になっているアクティブ（編集）ボタンセットを表示
+					jQuery('.vkEdit_btnSet_active.hidden').removeClass('hidden');
+					// 表示しているホバーボタンセットを非表示に
+					jQuery('.vkEdit_btnSet_hover').addClass('hidden');
 
-				// innerの中のHTMLをテキストエリアの中身に入れかえ
-				var select_editingTextArea = jQuery(this).parent().parent().parent().find('textarea');
-				var html_after = select_editingTextArea.val();
-				// textareaを削除
-				select_editingTextArea.before(html_after).remove();
+				// テキストエリアの中に編集するhtmlを入れる（wrapInnerだとタグを入れられてる場合にうまく表示できない）
+				jQuery('.vkEdit_column_inner').html('<textarea>' + html_before + '</textarea>');
 
-				// 保存ボタンを表示
-				vkEdit_display_masterPanel();
-			});
+				/*-------------------------------------------*/
+				// 編集反映ボタンをクリック
+				/*-------------------------------------------*/
+				jQuery(this).parent().parent().find('.vkEdit_btn_change').click(function(){
 
-			/*-------------------------------------------*/
-			// キャンセルボタンをクリック
-			/*-------------------------------------------*/
-			jQuery(this).parent().parent().find('.vkEdit_btn_cancel').click(function(){
+					// カラムからアクティブクラスを削除
+					jQuery(this).parent().parent().parent().removeClass('vkEdit_column_active');
 
-				// カラムからアクティブクラスを削除
-				jQuery(this).parent().parent().parent().removeClass('vkEdit_column_active');
+					// 表示するボタンの切り替え
 
-				// 表示するボタンの切り替え
+						// 非表示になっているホバーボタンセットを表示
+						jQuery('.vkEdit_btnSet_hover.hidden').removeClass('hidden');
+						// 表示しているアクティブボタンセットを非表示に
+						jQuery('.vkEdit_btnSet_active').addClass('hidden');
 
-					// 非表示になっているホバーボタンセットを表示
-					jQuery('.vkEdit_btnSet_hover.hidden').removeClass('hidden');
-					// 表示しているアクティブボタンセットを非表示に
-					jQuery('.vkEdit_btnSet_active').addClass('hidden');
+					// innerの中のHTMLをテキストエリアの中身に入れかえ
+					var select_editingTextArea = jQuery(this).parent().parent().parent().find('textarea');
+					var html_after = select_editingTextArea.val();
+					// textareaを削除
+					select_editingTextArea.before(html_after).remove();
 
-				// innerの中のHTMLをテキストエリアの中身に入れかえ
-				var select_editingTextArea = jQuery(this).parent().parent().parent().find('textarea');
-				// textareaを削除
-				select_editingTextArea.before(html_before).remove();
-			});
+					// 保存ボタンを表示
+					vkEdit_display_masterPanel();
+				});
 
-		}); // Edit ボタンが押された時の動作
+				/*-------------------------------------------*/
+				// キャンセルボタンをクリック
+				/*-------------------------------------------*/
+				jQuery(this).parent().parent().find('.vkEdit_btn_cancel').click(function(){
 
-	} // if (jQuery(this).hasClass('vkEdit_edit_hover')) {
+					// カラムからアクティブクラスを削除
+					jQuery(this).parent().parent().parent().removeClass('vkEdit_column_active');
 
-	});	// カラムにマウスオーバーしたら
+					// 表示するボタンの切り替え
 
-	/*-------------------------------------------*/
-	// カラムからマウスアウトしたら
-	/*-------------------------------------------*/
-	jQuery(this).mouseleave(function(){
+						// 非表示になっているホバーボタンセットを表示
+						jQuery('.vkEdit_btnSet_hover.hidden').removeClass('hidden');
+						// 表示しているアクティブボタンセットを非表示に
+						jQuery('.vkEdit_btnSet_active').addClass('hidden');
 
-		// 編集中ではない場合
-		if(!jQuery(this).hasClass('vkEdit_column_active')){
-			var html_column = jQuery(this).children('.vkEdit_column_inner').html();
-			jQuery(this).html(html_column);
-			// カラムからホバークラスを削除
-			jQuery(this).removeClass(editting_class);
-		} // if(!jQuery(this).hasClass('vkEdit_column_active')){
-	}); //jQuery(this).mouseleave(function(){
+					// innerの中のHTMLをテキストエリアの中身に入れかえ
+					var select_editingTextArea = jQuery(this).parent().parent().parent().find('textarea');
+					// textareaを削除
+					select_editingTextArea.before(html_before).remove();
+				});
+
+			}); // Edit ボタンが押された時の動作
+
+		} // if (jQuery(this).hasClass('vkEdit_edit_hover')) {
+
+		});	// カラムにマウスオーバーしたら
+
+		/*-------------------------------------------*/
+		// カラムからマウスアウトしたら
+		/*-------------------------------------------*/
+		jQuery(this).mouseleave(function(){
+
+			// 編集中ではない場合
+			if(!jQuery(this).hasClass('vkEdit_column_active')){
+				var html_column = jQuery(this).children('.vkEdit_column_inner').html();
+				jQuery(this).html(html_column);
+				// カラムからホバークラスを削除
+				jQuery(this).removeClass(editting_class);
+			} // if(!jQuery(this).hasClass('vkEdit_column_active')){
+		}); //jQuery(this).mouseleave(function(){
+
+	} // クラス名に col- が含まれている場合
 
 });
 } // function vkEdit_col_action()
@@ -338,25 +345,21 @@ function vkEdit_btn_addCol(){
 		// 今ある全部のカラムサイズを取得する
 		var allColSize = new Number(0);
 		// rowの中のカラムをループ
-		jQuery(this).parent().parent().parent().parent().children('.column').each(function(i){
+		jQuery(this).parent().parent().parent().parent().children('div').each(function(i){
 
 			// 1.カラムのクラスを全て取得
 			var colClass_all = jQuery(this).attr('class');
-			// 2.カラムのクラスを配列に分割
-			var colClass_array = colClass_all.split(" ");
-			// 3.カラムのクラスを順番に回す
-			for (i = 0; i < colClass_array.length; i++) {
-				// クラス名に col-sm- が含まれている場合
-				if ( colClass_array[i].match(/col-sm-/) ) {
-					// 数字の部分だけを取り出し（１文字ずつ判別するので２桁でも配列になる）
-					var colSize_array = colClass_array[i].match(/[1-9]/g);
-					// カラムのサイズ（配列になってしまったカラムの数字を2桁にするためにくっつける）
-					var colSize = new String();
-					for (i2 = 0; i2 < colSize_array.length; i2++) {
-						colSize += colSize_array[i2];
-					}
+			// クラス名に col- が含まれている場合
+			if ( colClass_all.match(/col-/) ) {
+				// 数字の部分だけを取り出し（１文字ずつ判別するので２桁でも配列になる）
+				var colSize_array = colClass_array[i].match(/[1-9]/g);
+				// カラムのサイズ（配列になってしまったカラムの数字を2桁にするためにくっつける）
+				var colSize = new String();
+				for (i2 = 0; i2 < colSize_array.length; i2++) {
+					colSize += colSize_array[i2];
 				}
 			}
+
 			allColSize = allColSize + parseInt(colSize);
 		}); // 今ある全部のカラムサイズを取得
 		console.log('合計のcol:' + allColSize);
@@ -405,7 +408,7 @@ function vkEdit_btn_addCol(){
 		select_edittingColumns.removeClass(colClass_editting_sizeClass).addClass('col-sm-'+editColSize);
 
 		// カラムを追加する
-		var add_row_html = '<div class="col-sm-'+ addColSize +' column">Input here.</div>';
+		var add_row_html = '<div class="col-sm-'+ addColSize +'">Input here.</div>';
 		select_edittingColumns.after(add_row_html);
 
 		vkEdit_row_action();
@@ -464,7 +467,7 @@ function vkEdit_rowWrapBtn_display(){
 /*-------------------------------------------*/
 function vkEdit_rowWrap_click(){
 	jQuery('.vkEdit_btn_rowWrap').click(function(){
-		jQuery(this).parent().wrap('<div class="row"><div class="col-sm-12 column"></div></div>');
+		jQuery(this).parent().wrap('<div class="row"><div class="col-sm-12"></div></div>');
 		// クリックされたのでrowWrapボタンを削除（重複wrapを防ぐため）
 		jQuery(this).remove();
 		// 新しく追加したグリッドでもエディタが走るように再実行
@@ -474,3 +477,10 @@ function vkEdit_rowWrap_click(){
 		vkEdit_display_masterPanel();
 	});
 }
+
+/*-------------------------------------------*/
+// $contentの中身が何もなかった場合の処理
+/*-------------------------------------------*/
+
+
+
