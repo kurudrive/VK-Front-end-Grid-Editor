@@ -116,7 +116,7 @@ jQuery(document).ready(function($){
 // row の基本処理
 /*-------------------------------------------*/
 function vkEdit_row_action(){
-	jQuery('.entry-content .row').each(function(i){
+	jQuery('#vkEdit_editWrap .row').each(function(i){
 		jQuery(this).mouseenter(function(){
 			// ホバー状態でない時
 			if (!jQuery(this).hasClass('vkEdit_row_hover')) {

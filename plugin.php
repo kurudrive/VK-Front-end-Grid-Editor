@@ -79,7 +79,7 @@ function vkEdit_saveStart(){
                 'post_content' : post_content,
             },
             success: function( response ){
-                jQuery('.entry-content').html(response);
+                jQuery('#vkEdit_editWrap').html(response);
             }
         });
         return false;
@@ -116,3 +116,12 @@ function ajax_post_update(){
 add_action( 'wp_ajax_ajax_post_update', 'ajax_post_update' );
 // 未ログインユーザー用
 add_action( 'wp_ajax_nopriv_ajax_post_update', 'ajax_post_update' );
+
+/*-------------------------------------------*/
+/*  Display post author unit
+/*-------------------------------------------*/
+add_filter( 'the_content', 'vkEdit_add_editWrap',2);
+function vkEdit_add_editWrap($content){
+    $content = '<div id="vkEdit_editWrap">'.$content.'</div>';
+    return $content;
+}
