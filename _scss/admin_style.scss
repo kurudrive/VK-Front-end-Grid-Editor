@@ -8,10 +8,14 @@ $rowPanel_color : #333;
 $col_bg_active : #ffffcc;
 
 
-#vkEdit_masterCtrlPanel { border:1px solid #c00 ; border-radius: 3px; padding: 10px;margin-bottom:10px;background-color: #ffe5e5;box-shadow:inset 0px 0px 0px 1px rgba(255,255,255,1);
-	button { padding: 3px 10px;background-color: #c00;color:#fff;border:none; border-radius: 3px; }
-	p { margin-bottom:0;color: #c00; }
+#vkEdit_masterCtrlPanel { border:1px solid #468847 ; border-radius: 3px; padding: 10px;margin:10px 0;background-color: #dff0d8;box-shadow:inset 0px 0px 0px 1px rgba(255,255,255,1);
+		button { padding: 3px 10px;;color:#fff;border:none; border-radius: 3px; }
+		p { margin-bottom:0;color: #468847; }
 
+	&.vkEdit_masterCtrlPanel_alert { border:1px solid #c00 ; background-color: #ffe5e5;
+		button { background-color: #c00 }
+		p { color:#c00; }
+	}
 }
 
 .sen { border:1px solid #ff0000;}

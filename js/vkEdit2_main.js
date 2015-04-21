@@ -1,5 +1,7 @@
 
 /*-------------------------------------------*/
+// 基本処理
+/*-------------------------------------------*/
 // htmlパーツ
 /*-------------------------------------------*/
 // row の基本処理
@@ -27,9 +29,25 @@
 // 保存ボタン表示処理
 		/*-------------------------------------------*/
 		// 保存処理（php側に記載）
-		/*-------------------------------------------*/
+/*-------------------------------------------*/
+// Row Wrap ボタン表示処理
+/*-------------------------------------------*/
+// Row Wrap ボタンが押された時の処理
+/*-------------------------------------------*/
 
+/*-------------------------------------------*/
+// 基本処理
+/*-------------------------------------------*/
 
+function vkEdit_functions(){
+	vkEdit_row_action();
+	vkEdit_col_action();
+	vkEdit_rowWrapBtn_display();
+}
+
+jQuery(document).ready(function($){
+	vkEdit_functions();
+});
 
 
 /*-------------------------------------------*/
@@ -44,45 +62,6 @@ var btn_row_del 	= '<span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-t
 // 行追加編集パネル
 var html_rowEditPanel = '<div class="vkEdit_editPanel_row  vkEdit_no_add_row">' + btn_row_add + btn_row_del + '</div>';
 var html_rowDefaultSet = '<div class="row"><div class="col-sm-12 column">&nbsp;</div></div>';
-
-
-var btn_col_edit 	= '<span class="vkEdit_btn vkEdit_btn_edit"><i class="fa fa-pencil"></i> Edit</span>';
-var btn_col_add 	= '<span class="vkEdit_btn vkEdit_btn_addCol"><i class="fa fa-plus-square"></i> Add</span>';
-var btn_col_del 	= '<span class="vkEdit_btn vkEdit_btn_delCol"><i class="fa fa-times"></i> Del</span>';
-var btn_col_change 	= '<span class="vkEdit_btn vkEdit_btn_change"><i class="fa fa-check-square"></i> Change</span>';
-var btn_col_chancel = '<span class="vkEdit_btn vkEdit_btn_cancel"><i class="fa fa-undo"></i> Cancel</span>';
-// カラムボタン
-var btn_col_sm12	= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm12">12/12</span>';
-var btn_col_sm9		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm9">9/12</span>';
-var btn_col_sm8		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm8">8/12</span>';
-var btn_col_sm6		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm6">6/12</span>';
-var btn_col_sm4		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm4">4/12</span>';
-var btn_col_sm3		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm3">3/12</span>';
-
-// カラムサイズボタンセット
-var html_colEditPanel_btnSet_size = '<div class="vkEdit_btnSet_size vkEdit_no_add_row">'+ btn_col_sm12 + btn_col_sm9 + btn_col_sm8 + btn_col_sm6 + btn_col_sm4 + btn_col_sm3 +'</div>';
-// カラムアクティブ編集ボタン（ [変更][ キャンセル ] + カラムサイズボタンセット）
-var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden vkEdit_no_add_row">'+ btn_col_change + btn_col_chancel + '</div>';
-// カラム非アクティブ編集ボタン
-var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover vkEdit_no_add_row">' + btn_col_edit + btn_col_add + btn_col_del + html_colEditPanel_btnSet_size + '</div>'
-
-
-// カラム編集パネルのHTML
-var html_colEditPanel = '<div class="vkEdit_editPanel_col vkEdit_no_add_row">'+ html_colEditPanel_btnSet_hover + html_colEditPanel_btnSet_active + '</div>';
-
-
-
-// 対象のカラム識別用クラス
-// var column_no = 'column_no_' + i;
-// カラム識別用のクラスとhover識別用クラスを編集に入れる
-var editting_class = 'vkEdit_column_hover';
-
-
-jQuery(document).ready(function($){
-	vkEdit_row_action();
-	vkEdit_col_action();
-	vkEdit_rowWrapBtn_display();
-});
 
 /*-------------------------------------------*/
 // row の基本処理
@@ -154,6 +133,35 @@ function vkEdit_btn_delRow(){
 /*-------------------------------------------*/
 // カラム
 /*-------------------------------------------*/
+
+var btn_col_edit 	= '<span class="vkEdit_btn vkEdit_btn_edit"><i class="fa fa-pencil"></i> Edit</span>';
+var btn_col_add 	= '<span class="vkEdit_btn vkEdit_btn_addCol"><i class="fa fa-plus-square"></i> Add</span>';
+var btn_col_del 	= '<span class="vkEdit_btn vkEdit_btn_delCol"><i class="fa fa-times"></i> Del</span>';
+var btn_col_change 	= '<span class="vkEdit_btn vkEdit_btn_change"><i class="fa fa-check-square"></i> Change</span>';
+var btn_col_chancel = '<span class="vkEdit_btn vkEdit_btn_cancel"><i class="fa fa-undo"></i> Cancel</span>';
+// カラムボタン
+var btn_col_sm12	= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm12">12/12</span>';
+var btn_col_sm9		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm9">9/12</span>';
+var btn_col_sm8		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm8">8/12</span>';
+var btn_col_sm6		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm6">6/12</span>';
+var btn_col_sm4		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm4">4/12</span>';
+var btn_col_sm3		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm3">3/12</span>';
+
+// カラムサイズボタンセット
+var html_colEditPanel_btnSet_size = '<div class="vkEdit_btnSet_size vkEdit_no_add_row">'+ btn_col_sm12 + btn_col_sm9 + btn_col_sm8 + btn_col_sm6 + btn_col_sm4 + btn_col_sm3 +'</div>';
+// カラムアクティブ編集ボタン（ [変更][ キャンセル ] + カラムサイズボタンセット）
+var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden vkEdit_no_add_row">'+ btn_col_change + btn_col_chancel + '</div>';
+// カラム非アクティブ編集ボタン
+var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover vkEdit_no_add_row">' + btn_col_edit + btn_col_add + btn_col_del + html_colEditPanel_btnSet_size + '</div>'
+
+// カラム編集パネルのHTML
+var html_colEditPanel = '<div class="vkEdit_editPanel_col vkEdit_no_add_row">'+ html_colEditPanel_btnSet_hover + html_colEditPanel_btnSet_active + '</div>';
+
+// 対象のカラム識別用クラス
+// var column_no = 'column_no_' + i;
+// カラム識別用のクラスとhover識別用クラスを編集に入れる
+var editting_class = 'vkEdit_column_hover';
+
 function vkEdit_col_action(){
 // function vkColInnerMouseAction(){
 jQuery('#vkEdit_editWrap .row .column').each(function(i){
@@ -409,7 +417,7 @@ function vkEdit_btn_delCol(){
 // 保存ボタン表示処理
 /*-------------------------------------------*/
 function vkEdit_display_masterPanel(){
-	var html_masterPanel = '<div id="vkEdit_masterCtrlPanel" class="vkEdit_masterCtrlPanel row"><div class="col-md-2"><button id="submit" class="button button-primary button-large">SAVE</button></div><div class="col-md-10"><p>Change has not yet been saved.</p></div></div>';
+	var html_masterPanel = '<div id="vkEdit_masterCtrlPanel" class="vkEdit_masterCtrlPanel vkEdit_masterCtrlPanel_alert row"><div class="col-md-2"><button id="submit" class="button button-primary button-large">Save</button></div><div class="col-md-10"><p>Change has not yet been saved.</p></div></div>';
 	if( ! jQuery('#vkEdit_editWrap').prev().hasClass('vkEdit_masterCtrlPanel')){
 		jQuery('#vkEdit_editWrap').before(html_masterPanel);
 		/*-------------------------------------------*/
@@ -451,8 +459,10 @@ function vkEdit_rowWrapBtn_display(){
 function vkEdit_rowWrap_click(){
 	jQuery('.vkEdit_btn_rowWrap').click(function(){
 		jQuery(this).parent().wrap('<div class="row"><div class="col-sm-12 column"></div></div>');
+		// 新しく追加したグリッドでもエディタが走るように再実行
 		vkEdit_row_action();
 		vkEdit_col_action();
+		// 保存ボタンを表示
+		vkEdit_display_masterPanel();
 	});
-	
 }

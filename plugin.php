@@ -69,6 +69,7 @@ function vkEdit_saveStart(){
         <?php global $post; ?>
         var post_id = '<?php echo $post->ID; ?>';
         var post_content = jQuery('#vkEdit_editWrap').html();
+        jQuery(this).html('<i class="fa fa-refresh"></i>');
         jQuery.ajax({
             type: 'POST',
             url: ajaxurl,
@@ -79,7 +80,11 @@ function vkEdit_saveStart(){
                 'post_content' : post_content,
             },
             success: function( response ){
+                jQuery('#vkEdit_masterCtrlPanel button').remove();
+                jQuery('#vkEdit_masterCtrlPanel').removeClass('vkEdit_masterCtrlPanel_alert');
+                jQuery('#vkEdit_masterCtrlPanel p').html('Save was successfully.<br>If the display is broken, please reload the page.');
                 jQuery('#vkEdit_editWrap').html(response);
+                location.reload();
             }
         });
         return false;
