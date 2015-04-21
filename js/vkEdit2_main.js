@@ -36,12 +36,13 @@
 // htmlパーツ
 /*-------------------------------------------*/
 
+var class_columns	= '.col-sm-12,.col-sm-11,.col-sm-10,.col-sm-9,.col-sm-9,.col-sm-7,.col-sm-6,.col-sm-5,.col-sm-4,.col-sm-3,.col-sm-2,.col-sm-1,'
 
 var btn_row_add 	= '<span class="vkEdit_btn vkEdit_btn_addRow"><i class="fa fa-plus-square"></i> Add</span>';
 var btn_row_del 	= '<span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-times"></i> Del</span>';
 
 // 行追加編集パネル
-var html_rowEditPanel = '<div class="vkEdit_editPanel_row">' + btn_row_add + btn_row_del + '</div>';
+var html_rowEditPanel = '<div class="vkEdit_editPanel_row  vkEdit_no_add_row">' + btn_row_add + btn_row_del + '</div>';
 var html_rowDefaultSet = '<div class="row"><div class="col-sm-12 column">&nbsp;</div></div>';
 
 
@@ -59,15 +60,15 @@ var btn_col_sm4		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm4">4
 var btn_col_sm3		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm3">3/12</span>';
 
 // カラムサイズボタンセット
-var html_colEditPanel_btnSet_size = '<div class="vkEdit_btnSet_size">'+ btn_col_sm12 + btn_col_sm9 + btn_col_sm8 + btn_col_sm6 + btn_col_sm4 + btn_col_sm3 +'</div>';
+var html_colEditPanel_btnSet_size = '<div class="vkEdit_btnSet_size vkEdit_no_add_row">'+ btn_col_sm12 + btn_col_sm9 + btn_col_sm8 + btn_col_sm6 + btn_col_sm4 + btn_col_sm3 +'</div>';
 // カラムアクティブ編集ボタン（ [変更][ キャンセル ] + カラムサイズボタンセット）
-var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden">'+ btn_col_change + btn_col_chancel + '</div>';
+var html_colEditPanel_btnSet_active = '<div class="vkEdit_btnSet vkEdit_btnSet_active hidden vkEdit_no_add_row">'+ btn_col_change + btn_col_chancel + '</div>';
 // カラム非アクティブ編集ボタン
-var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover">' + btn_col_edit + btn_col_add + btn_col_del + html_colEditPanel_btnSet_size + '</div>'
+var html_colEditPanel_btnSet_hover = '<div class="vkEdit_btnSet vkEdit_btnSet_hover vkEdit_no_add_row">' + btn_col_edit + btn_col_add + btn_col_del + html_colEditPanel_btnSet_size + '</div>'
 
 
 // カラム編集パネルのHTML
-var html_colEditPanel = '<div class="vkEdit_editPanel_col">'+ html_colEditPanel_btnSet_hover + html_colEditPanel_btnSet_active + '</div>';
+var html_colEditPanel = '<div class="vkEdit_editPanel_col vkEdit_no_add_row">'+ html_colEditPanel_btnSet_hover + html_colEditPanel_btnSet_active + '</div>';
 
 
 
@@ -80,6 +81,7 @@ var editting_class = 'vkEdit_column_hover';
 jQuery(document).ready(function($){
 	vkEdit_row_action();
 	vkEdit_col_action();
+	vkEdit_add_rowWrapBtn();
 });
 
 /*-------------------------------------------*/
@@ -365,7 +367,6 @@ function vkEdit_btn_addCol(){
 				colSize_number = parseInt(colSize);
 			}
 		}
-		console.log('編集中のcol:'+colSize);
 
 		// 12 == 今ある全部のカラムサイズ
 		if ( 12 == allColSize ) {
@@ -416,4 +417,40 @@ function vkEdit_display_masterPanel(){
 		/*-------------------------------------------*/
 		vkEdit_saveStart();
 	}
+}
+
+/*-------------------------------------------*/
+// Row Wrap ボタン表示処理
+/*-------------------------------------------*/
+var btn_rowWrap = '<span class="vkEdit_btn vkEdit_btn_rowWrap"><i class="fa fa-sign-in"></i> Row Wrap</span>';
+function vkEdit_add_rowWrapBtn(){
+	jQuery('#vkEdit_editWrap div,#vkEdit_editWrap h1,#vkEdit_editWrap h2,#vkEdit_editWrap h3,#vkEdit_editWrap h4,#vkEdit_editWrap h5,#vkEdit_editWrap h6,#vkEdit_editWrap p,#vkEdit_editWrap ul,#vkEdit_editWrap ol,#vkEdit_editWrap block,#vkEdit_editWrap blockquote').each(function(i){
+			// マウスオーバーしたら
+			jQuery(this).mouseenter(function(){
+				// 既にrowWrapボタンが存在しない場合 && 既に rowでない場合 && カラムでない場合 && rowWrapボタンを表示する対象でない場合
+				if ( !jQuery(this).children().hasClass('vkEdit_btn_rowWrap') && !jQuery(this).hasClass('row') && !jQuery(this).hasClass('column') && !jQuery(this).hasClass('vkEdit_no_add_row') ){
+					// && jQuery(this).has,'.vkEdit_column_inner')){
+					// rowWrapボタンを表示
+					jQuery(this).prepend(btn_rowWrap);
+					// rowWrapボタンが押されたら
+					vkEdit_rowWrap();
+					// マウスアウトしたら
+					jQuery(this).mouseleave(function(){
+						// rowWrapボタンを削除
+						jQuery(this).children('.vkEdit_btn_rowWrap').remove();
+					});
+				}
+			});
+	});
+
+}
+
+
+function vkEdit_rowWrap(){
+	jQuery('.vkEdit_btn_rowWrap').click(function(){
+		jQuery(this).parent().wrap('<div class="row"><div class="col-sm-12 column"></div></div>');
+		vkEdit_row_action();
+		vkEdit_col_action();
+	});
+	
 }
