@@ -459,6 +459,8 @@ function vkEdit_rowWrapBtn_display(){
 function vkEdit_rowWrap_click(){
 	jQuery('.vkEdit_btn_rowWrap').click(function(){
 		jQuery(this).parent().wrap('<div class="row"><div class="col-sm-12 column"></div></div>');
+		// クリックされたのでrowWrapボタンを削除（重複wrapを防ぐため）
+		jQuery(this).remove();
 		// 新しく追加したグリッドでもエディタが走るように再実行
 		vkEdit_row_action();
 		vkEdit_col_action();
