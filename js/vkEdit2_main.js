@@ -1,33 +1,3 @@
-/*-------------------------------------------*/
-/* エディターの起動
-/*		.entry-content 内にdivがなかったら
-			// Add Gridボタン表示
-/*		div にhover したら
-/			// .row が付いていたら
-				// col がない場合は 
-/*				// 編集モード_1
-					
-
-			// .row がなかったら
-				// Use Grid ボタンを表示
-					// Use Grid ボタンが押されたら
-						// .rowを付与＆内側に div.col-sm-12 を追加
-		// divからmouseout したら
-			// 編集なび
-
-/* 編集モード_1
-/* 対象のrowに編集バーを表示[ Add row ][ Delete ]
-/* [ Add row ]
-
-// col にhover したら
-	// 編集モード_2
-	// [Edit]が押されたら
-	// textareaと[Enter]ボタンを追加
-	// colの中身を textarea タグの中に入れる
-	// [Enter]ボタンが押されたら中身をHTMLに戻す
-	// textareaと[Enter]ボタンを削除
-
-
 
 /*-------------------------------------------*/
 // htmlパーツ
@@ -184,7 +154,7 @@ function vkEdit_btn_delRow(){
 /*-------------------------------------------*/
 function vkEdit_col_action(){
 // function vkColInnerMouseAction(){
-jQuery('.entry-content .row .column').each(function(i){
+jQuery('#vkEdit_editWrap .row .column').each(function(i){
 
 	/*-------------------------------------------*/
 	// カラムにマウスオーバーしたら
@@ -439,8 +409,8 @@ function vkEdit_btn_delCol(){
 /*-------------------------------------------*/
 function vkEdit_display_masterPanel(){
 	var html_masterPanel = '<div id="vkEdit_masterCtrlPanel" class="vkEdit_masterCtrlPanel row"><div class="col-md-2"><button id="submit" class="button button-primary button-large">SAVE</button></div><div class="col-md-10"><p>Change has not yet been saved.</p></div></div>';
-	if( ! jQuery('.entry-content').prev().hasClass('vkEdit_masterCtrlPanel')){
-		jQuery('.entry-content').before(html_masterPanel);
+	if( ! jQuery('#vkEdit_editWrap').prev().hasClass('vkEdit_masterCtrlPanel')){
+		jQuery('#vkEdit_editWrap').before(html_masterPanel);
 		/*-------------------------------------------*/
 		// 保存処理（php側に記載）
 		/*-------------------------------------------*/
