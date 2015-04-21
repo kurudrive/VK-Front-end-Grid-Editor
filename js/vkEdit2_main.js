@@ -362,8 +362,6 @@ function vkEdit_btn_addCol(){
 
 			allColSize = allColSize + parseInt(colSize);
 		}); // 今ある全部のカラムサイズを取得
-		console.log('合計のcol:' + allColSize);
-
 
 		// 1.カラムのクラスを全て取得
 		var colClass_all = select_edittingColumns.attr('class');
@@ -371,8 +369,8 @@ function vkEdit_btn_addCol(){
 		var colClass_array = colClass_all.split(" ");
 		// 3.カラムのクラスを順番に回す
 		for (i = 0; i < colClass_array.length; i++) {
-			// クラス名に col-sm- が含まれている場合
-			if ( colClass_array[i].match(/col-sm-/) ) {
+			// クラス名に col- が含まれている場合
+			if ( colClass_all.match(/col-/) ) {
 				// 編集パネルが出ているカラムのサイズクラス
 				var colClass_editting_sizeClass = colClass_array[i];
 				// 数字の部分だけを取り出し（１文字ずつ判別するので２桁でも配列になる）
@@ -445,9 +443,11 @@ function vkEdit_rowWrapBtn_display(){
 	jQuery('#vkEdit_editWrap div,#vkEdit_editWrap h1,#vkEdit_editWrap h2,#vkEdit_editWrap h3,#vkEdit_editWrap h4,#vkEdit_editWrap h5,#vkEdit_editWrap h6,#vkEdit_editWrap p,#vkEdit_editWrap ul,#vkEdit_editWrap ol,#vkEdit_editWrap block,#vkEdit_editWrap blockquote').each(function(i){
 			// マウスオーバーしたら
 			jQuery(this).mouseenter(function(){
+				// divのクラスを全て取得
+				var colClass_all = jQuery(this).attr('class');
 				// 既にrowWrapボタンが存在しない場合 && 既に rowでない場合 && カラムでない場合 && rowWrapボタンを表示する対象でない場合
-				if ( !jQuery(this).children().hasClass('vkEdit_btn_rowWrap') && !jQuery(this).hasClass('row') && !jQuery(this).hasClass('column') && !jQuery(this).hasClass('vkEdit_no_add_row') ){
-					// && jQuery(this).has,'.vkEdit_column_inner')){
+				if ( !jQuery(this).children().hasClass('vkEdit_btn_rowWrap') && !jQuery(this).hasClass('row') && !jQuery(this).hasClass('vkEdit_no_add_row') && !colClass_all.match(/col-/) ){
+
 					// rowWrapボタンを表示
 					jQuery(this).prepend(btn_rowWrap);
 					// rowWrapボタンが押されたら
@@ -477,10 +477,3 @@ function vkEdit_rowWrap_click(){
 		vkEdit_display_masterPanel();
 	});
 }
-
-/*-------------------------------------------*/
-// $contentの中身が何もなかった場合の処理
-/*-------------------------------------------*/
-
-
-
