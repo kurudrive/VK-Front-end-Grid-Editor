@@ -81,7 +81,7 @@ var editting_class = 'vkEdit_column_hover';
 jQuery(document).ready(function($){
 	vkEdit_row_action();
 	vkEdit_col_action();
-	vkEdit_add_rowWrapBtn();
+	vkEdit_rowWrapBtn_display();
 });
 
 /*-------------------------------------------*/
@@ -423,7 +423,7 @@ function vkEdit_display_masterPanel(){
 // Row Wrap ボタン表示処理
 /*-------------------------------------------*/
 var btn_rowWrap = '<span class="vkEdit_btn vkEdit_btn_rowWrap"><i class="fa fa-sign-in"></i> Row Wrap</span>';
-function vkEdit_add_rowWrapBtn(){
+function vkEdit_rowWrapBtn_display(){
 	jQuery('#vkEdit_editWrap div,#vkEdit_editWrap h1,#vkEdit_editWrap h2,#vkEdit_editWrap h3,#vkEdit_editWrap h4,#vkEdit_editWrap h5,#vkEdit_editWrap h6,#vkEdit_editWrap p,#vkEdit_editWrap ul,#vkEdit_editWrap ol,#vkEdit_editWrap block,#vkEdit_editWrap blockquote').each(function(i){
 			// マウスオーバーしたら
 			jQuery(this).mouseenter(function(){
@@ -433,7 +433,7 @@ function vkEdit_add_rowWrapBtn(){
 					// rowWrapボタンを表示
 					jQuery(this).prepend(btn_rowWrap);
 					// rowWrapボタンが押されたら
-					vkEdit_rowWrap();
+					vkEdit_rowWrap_click();
 					// マウスアウトしたら
 					jQuery(this).mouseleave(function(){
 						// rowWrapボタンを削除
@@ -445,8 +445,10 @@ function vkEdit_add_rowWrapBtn(){
 
 }
 
-
-function vkEdit_rowWrap(){
+/*-------------------------------------------*/
+// Row Wrap ボタンが押された時の処理
+/*-------------------------------------------*/
+function vkEdit_rowWrap_click(){
 	jQuery('.vkEdit_btn_rowWrap').click(function(){
 		jQuery(this).parent().wrap('<div class="row"><div class="col-sm-12 column"></div></div>');
 		vkEdit_row_action();
