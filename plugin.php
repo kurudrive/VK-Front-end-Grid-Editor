@@ -1,6 +1,6 @@
 <?php
 /*
- * Plugin Name: VK Front end grid editor
+ * Plugin Name: VK Front-end Grid Editor
  * Plugin URI:
  * Description:
  * Version:
@@ -70,23 +70,26 @@ function vkEdit_saveStart(){
         var post_id = '<?php echo $post->ID; ?>';
         var post_content = jQuery('#vkEdit_editWrap').html();
         jQuery(this).html('<i class="fa fa-refresh"></i>');
-        jQuery.ajax({
-            type: 'POST',
-            url: ajaxurl,
-            data: {
-                // 実行するphp関数
-                'action' : 'ajax_post_update',
-                'post_id' : post_id,
-                'post_content' : post_content,
-            },
-            success: function( response ){
-                jQuery('#vkEdit_masterCtrlPanel button').remove();
-                jQuery('#vkEdit_masterCtrlPanel').removeClass('vkEdit_masterCtrlPanel_alert');
-                jQuery('#vkEdit_masterCtrlPanel p').html('Save was successfully.<br>If the display is broken, please reload the page.');
-                jQuery('#vkEdit_editWrap').html(response);
-                location.reload();
-            }
-        });
+        // 編集パネルが消える前に保存されるのを防ぐために少し待つ
+        setTimeout(function(){        
+            jQuery.ajax({
+                type: 'POST',
+                url: ajaxurl,
+                data: {
+                    // 実行するphp関数
+                    'action' : 'ajax_post_update',
+                    'post_id' : post_id,
+                    'post_content' : post_content,
+                },
+                success: function( response ){
+                    jQuery('#vkEdit_masterCtrlPanel button').remove();
+                    jQuery('#vkEdit_masterCtrlPanel').removeClass('vkEdit_masterCtrlPanel_alert');
+                    jQuery('#vkEdit_masterCtrlPanel p').html('Save was successfully.<br>If the display is broken, please reload the page.');
+                    jQuery('#vkEdit_editWrap').html(response);
+                    location.reload();
+                }
+            });
+        },500);
         return false;
     });  
 }
