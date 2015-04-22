@@ -196,10 +196,7 @@ jQuery('#vkEdit_editWrap .row div').each(function(i){
 		if (!jQuery(this).hasClass('vkEdit_column_hover')) {
 			// カラムにホバー識別クラス追加
 			jQuery(this).addClass(editting_class);
-			// カラム内のHTMLを格納
-			var html_before = jQuery(this).html();
 			// columnの中をhtml改変用のdivで囲う
-
 			jQuery(this).wrapInner('<div class="vkEdit_column_inner">');
 			// row内、Add hover panel
 			jQuery(this).children('.vkEdit_column_inner').before( html_colEditPanel );
@@ -221,9 +218,14 @@ jQuery('#vkEdit_editWrap .row div').each(function(i){
 			/*-------------------------------------------*/
 			jQuery(this).find('.vkEdit_editPanel_col .vkEdit_btn_edit').click(function(){
 
+				// 対象のカラム
+				var select_targetCol = jQuery(this).parent().parent().parent();
 				// カラムにアクティブクラスを追加
-				jQuery(this).parent().parent().parent().addClass('vkEdit_column_active');
+				select_targetCol.addClass('vkEdit_column_active');
 				jQuery(this).parent().parent().css("height","inherit");
+
+				// カラム内のHTMLを格納
+				var html_before = select_targetCol.find('.vkEdit_column_inner').html();
 
 				// 表示するボタンの切り替え
 
@@ -233,22 +235,24 @@ jQuery('#vkEdit_editWrap .row div').each(function(i){
 					jQuery('.vkEdit_btnSet_hover').addClass('hidden');
 
 				// テキストエリアの中に編集するhtmlを入れる（wrapInnerだとタグを入れられてる場合にうまく表示できない）
-				jQuery('.vkEdit_column_inner').html('<textarea>' + html_before + '</textarea>');
+				select_targetCol.children('.vkEdit_column_inner').html('<textarea>' + html_before + '</textarea>');
 
 				/*-------------------------------------------*/
 				// 編集反映ボタンをクリック
 				/*-------------------------------------------*/
 				jQuery(this).parent().parent().find('.vkEdit_btn_change').click(function(){
 
+					// 対象のカラム
+					var select_targetCol = jQuery(this).parent().parent().parent();
 					// カラムからアクティブクラスを削除
-					jQuery(this).parent().parent().parent().removeClass('vkEdit_column_active');
+					select_targetCol.removeClass('vkEdit_column_active');
 
 					// 表示するボタンの切り替え
 
 						// 非表示になっているホバーボタンセットを表示
-						jQuery('.vkEdit_btnSet_hover.hidden').removeClass('hidden');
+						select_targetCol.find('.vkEdit_btnSet_hover.hidden').removeClass('hidden');
 						// 表示しているアクティブボタンセットを非表示に
-						jQuery('.vkEdit_btnSet_active').addClass('hidden');
+						select_targetCol.find('.vkEdit_btnSet_active').addClass('hidden');
 
 					// innerの中のHTMLをテキストエリアの中身に入れかえ
 					var select_editingTextArea = jQuery(this).parent().parent().parent().find('textarea');
@@ -265,15 +269,17 @@ jQuery('#vkEdit_editWrap .row div').each(function(i){
 				/*-------------------------------------------*/
 				jQuery(this).parent().parent().find('.vkEdit_btn_cancel').click(function(){
 
+					// 対象のカラム
+					var select_targetCol = jQuery(this).parent().parent().parent();
 					// カラムからアクティブクラスを削除
-					jQuery(this).parent().parent().parent().removeClass('vkEdit_column_active');
+					select_targetCol.removeClass('vkEdit_column_active');
 
 					// 表示するボタンの切り替え
 
 						// 非表示になっているホバーボタンセットを表示
-						jQuery('.vkEdit_btnSet_hover.hidden').removeClass('hidden');
+						select_targetCol.find('.vkEdit_btnSet_hover.hidden').removeClass('hidden');
 						// 表示しているアクティブボタンセットを非表示に
-						jQuery('.vkEdit_btnSet_active').addClass('hidden');
+						select_targetCol.find('.vkEdit_btnSet_active').addClass('hidden');
 
 					// innerの中のHTMLをテキストエリアの中身に入れかえ
 					var select_editingTextArea = jQuery(this).parent().parent().parent().find('textarea');
