@@ -337,6 +337,8 @@ function vkEdit_btn_changeCol(){
 		} else if ( jQuery(this).hasClass('vkEdit_btn_sm3') ) {
 			select_current_column.addClass('col-sm-3');
 		}
+		// 保存ボタンを表示
+		vkEdit_display_masterPanel();
 	});
 }
 
@@ -445,7 +447,7 @@ function vkEdit_btn_delCol(){
 // 保存ボタン表示処理
 /*-------------------------------------------*/
 function vkEdit_display_masterPanel(){
-	var html_masterPanel = '<div id="vkEdit_masterCtrlPanel" class="vkEdit_masterCtrlPanel vkEdit_masterCtrlPanel_alert row"><div class="col-md-2"><button id="submit" class="button button-primary button-large">Save</button></div><div class="col-md-10"><p>Change has not yet been saved.</p></div></div>';
+	var html_masterPanel = '<div id="vkEdit_masterCtrlPanel" class="vkEdit_masterCtrlPanel vkEdit_masterCtrlPanel_alert row"><div class="col-md-2"><button id="submit" class="button button-primary button-large"><i class="fa fa-floppy-o"></i> Save</button></div><div class="col-md-10"><p>Change has not yet been saved.</p></div></div>';
 	if( ! jQuery('#vkEdit_editWrap').prev().hasClass('vkEdit_masterCtrlPanel')){
 		jQuery('#vkEdit_editWrap').before(html_masterPanel);
 		/*-------------------------------------------*/

@@ -78,13 +78,14 @@ function content_edit() {
 ?>
 <script>
 function vkEdit_saveStart(){
-    jQuery('#submit').click(function(){
+    jQuery('#vkEdit_masterCtrlPanel #submit').click(function(){
         // phpに投げる変数（変更するポストID）
         <?php global $post; ?>
         var post_id = '<?php echo $post->ID; ?>';
         var post_content = jQuery('#vkEdit_editWrap').html();
         // 保存ボタンをクリックされたらボタンを変更する
-        jQuery(this).html('<i class="fa fa-refresh"></i>');
+        jQuery(this).after('<i class="fa fa-refresh" id="icon_refresh"></i>').remove();
+        jQuery('#vkEdit_masterCtrlPanel p').html('Saving...');
         // 編集パネルが消える前に保存されるのを防ぐために少し待つ
         setTimeout(function(){        
             jQuery.ajax({
@@ -97,9 +98,9 @@ function vkEdit_saveStart(){
                     'post_content' : post_content,
                 },
                 success: function( response ){
-                    jQuery('#vkEdit_masterCtrlPanel button').remove();
+                    jQuery('#vkEdit_masterCtrlPanel i').remove();
                     jQuery('#vkEdit_masterCtrlPanel').removeClass('vkEdit_masterCtrlPanel_alert');
-                    jQuery('#vkEdit_masterCtrlPanel p').html('Save was successfully.<br>If the display is broken, please reload the page.');
+                    jQuery('#vkEdit_masterCtrlPanel p').html('Save was successfully.<br>Now Reloading...');
                     jQuery('#vkEdit_editWrap').html(response);
                     location.reload();
                 }
