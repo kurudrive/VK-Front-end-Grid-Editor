@@ -79,34 +79,46 @@ function content_edit() {
 <script>
 function vkEdit_saveStart(){
     jQuery('#vkEdit_masterCtrlPanel #submit').click(function(){
-        // phpに投げる変数（変更するポストID）
-        <?php global $post; ?>
-        var post_id = '<?php echo $post->ID; ?>';
-        var post_content = jQuery('#vkEdit_editWrap').html();
-        // 保存ボタンをクリックされたらボタンを変更する
-        jQuery(this).after('<i class="fa fa-refresh" id="icon_refresh"></i>').remove();
-        jQuery('#vkEdit_masterCtrlPanel p').html('Saving...');
-        // 編集パネルが消える前に保存されるのを防ぐために少し待つ
-        setTimeout(function(){        
-            jQuery.ajax({
-                type: 'POST',
-                url: ajaxurl,
-                data: {
-                    // 実行するphp関数
-                    'action' : 'ajax_post_update',
-                    'post_id' : post_id,
-                    'post_content' : post_content,
-                },
-                success: function( response ){
-                    jQuery('#vkEdit_masterCtrlPanel i').remove();
-                    jQuery('#vkEdit_masterCtrlPanel').removeClass('vkEdit_masterCtrlPanel_alert');
-                    jQuery('#vkEdit_masterCtrlPanel p').html('Save was successfully.<br>Now Reloading...');
-                    jQuery('#vkEdit_editWrap').html(response);
-                    location.reload();
-                }
-            });
-        },500);
-        return false;
+
+        // 
+        if( jQuery('#vkEdit_editWrap').find('div').hasClass('vkEdit_editPanel_col') ){
+            alert('編集中のカラムがあるため保存出来ません。');
+        } else {
+
+            // phpに投げる変数（変更するポストID）
+            <?php global $post; ?>
+            var post_id = '<?php echo $post->ID; ?>';
+            var post_content = jQuery('#vkEdit_editWrap').html();
+
+            // 保存ボタンをクリックされたらボタンを変更する
+            jQuery(this).after('<i class="fa fa-refresh" id="icon_refresh"></i>').remove();
+            jQuery('#vkEdit_masterCtrlPanel p').html('Saving...');
+
+            // 編集パネルが消える前に保存されるのを防ぐために少し待つ
+            setTimeout(function(){        
+                jQuery.ajax({
+                    type: 'POST',
+                    url: ajaxurl,
+                    data: {
+                        // 実行するphp関数
+                        'action' : 'ajax_post_update',
+                        'post_id' : post_id,
+                        'post_content' : post_content,
+                    },
+                    success: function( response ){
+                        jQuery('#vkEdit_masterCtrlPanel i').remove();
+                        jQuery('#vkEdit_masterCtrlPanel').removeClass('vkEdit_masterCtrlPanel_alert');
+                        jQuery('#vkEdit_masterCtrlPanel p').html('Save was successfully.<br>Now Reloading...');
+                        jQuery('#vkEdit_editWrap').html(response);
+                        location.reload();
+                    }
+                });
+            },500);
+            return false;
+
+
+        }
+
     });  
 }
 </script>

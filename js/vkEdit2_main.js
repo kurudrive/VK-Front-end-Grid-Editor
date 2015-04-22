@@ -90,7 +90,7 @@ function vkEdit_row_action(){
 					jQuery(this).animate({ 
 						height: "22px",
 						opacity: 1
-					}, 500);
+					}, 300);
 				});
 
 				// rowを追加
@@ -103,13 +103,13 @@ function vkEdit_row_action(){
 		jQuery(this).mouseleave(function(){
 			jQuery(this).removeClass('vkEdit_row_hover');
 			jQuery(this).children('.vkEdit_editPanel_row').each(function(){
-				// jQuery(this).fadeOut(500,function(){
+				// jQuery(this).fadeOut(300,function(){
 				// 	jQuery(this).remove();
 				// });
 				jQuery(this).animate({ 
 					height: '0',
 					opacity: 0
-				}, 500, function(){
+				}, 300, function(){
 					jQuery(this).remove();
 				});
 			});
@@ -204,7 +204,7 @@ jQuery('#vkEdit_editWrap .row div').each(function(i){
 			jQuery(this).children('.vkEdit_column_inner').prev('.vkEdit_editPanel_col').animate({ 
 				// height: "44px",
 				opacity: 1
-			}, 500);
+			}, 300);
 
 			// カラム追加ボタンが押された時の処理
 			vkEdit_btn_addCol();
