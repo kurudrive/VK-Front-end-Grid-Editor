@@ -25,6 +25,12 @@
 // カラムサイズ変更ボタンが押された時の処理
 /*-------------------------------------------*/
 // カラム追加ボタンが押された時の処理
+		/*-------------------------------------------*/
+		// 今ある全部のカラムサイズを取得する
+		/*-------------------------------------------*/
+		// カラム追加ボタンを押したカラムのサイズを取得する
+		/*-------------------------------------------*/
+		// 追加するカラムのサイズ計算
 /*-------------------------------------------*/
 // 保存ボタン表示処理
 		/*-------------------------------------------*/
@@ -133,6 +139,7 @@ function vkEdit_btn_delRow(){
 	jQuery('.vkEdit_btn_delRow').click(function(){
 		if (confirm("Are you sure?")) {
 			jQuery(this).parent().parent().remove();
+			vkEdit_display_masterPanel();
 		}
 	});
 }
@@ -429,6 +436,7 @@ function vkEdit_btn_delCol(){
 	jQuery('.vkEdit_btn_delCol').click(function(){
 		if (confirm("Are you sure?")) {
 			jQuery(this).parent().parent().parent().remove();
+			vkEdit_display_masterPanel();
 		}
 	});
 }
