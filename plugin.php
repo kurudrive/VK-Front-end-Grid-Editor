@@ -46,6 +46,15 @@ function vkEdit2_front_style_setup(){
 add_action('wp_head', 'vkEdit2_front_style_setup');
 
 /*-------------------------------------------*/
+/*  Admin page _ Add editor css
+/*-------------------------------------------*/
+function vkEdit_add_editor_style_setup() {
+    $gridCss_url = plugins_url('css/bootstrap.min.css', __FILE__);
+    add_editor_style( $gridCss_url );
+}
+add_action( 'after_setup_theme', 'vkEdit_add_editor_style_setup' );
+
+/*-------------------------------------------*/
 /* ajax _ URLを取得・設定
 /*-------------------------------------------*/
 function add_my_ajaxurl() {
