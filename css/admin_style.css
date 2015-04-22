@@ -13,6 +13,7 @@ header h1 { margin: 0; }
 .sen { border: 1px solid #ff0000; }
 
 .vkEdit_btn { display: inline-block; padding: 2px 5px; margin: 0 2px; font-size: 10px; line-height: 14px; background-color: #555; color: #f5f5f5; cursor: pointer; }
+.vkEdit_btn.vkEdit_btn_colSize { background-color: #e5e5e5; color: #666; }
 
 .vkEdit_btnSet { display: block; overflow: hidden; float: left; }
 
