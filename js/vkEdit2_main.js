@@ -31,6 +31,8 @@
 		// カラム追加ボタンを押したカラムのサイズを取得する
 		/*-------------------------------------------*/
 		// 追加するカラムのサイズ計算
+				/*-------------------------------------------*/
+				// カラムを追加
 /*-------------------------------------------*/
 // 保存ボタン表示処理
 		/*-------------------------------------------*/
@@ -153,7 +155,7 @@ var btn_col_edit 	= '<span class="vkEdit_btn vkEdit_btn_edit"><i class="fa fa-pe
 var btn_col_add 	= '<span class="vkEdit_btn vkEdit_btn_addCol"><i class="fa fa-plus-square"></i> Add Col</span>';
 var btn_col_del 	= '<span class="vkEdit_btn vkEdit_btn_delCol"><i class="fa fa-times"></i> Del</span>';
 var btn_col_change 	= '<span class="vkEdit_btn vkEdit_btn_change"><i class="fa fa-check-square"></i> Change</span>';
-var btn_col_chancel = '<span class="vkEdit_btn vkEdit_btn_cancel"><i class="fa fa-undo"></i> Cancel</span>';
+var btn_col_chancel = '<span class="vkEdit_btn vkEdit_btn_cancel"><i class="fa fa-times"></i> Cancel</span>';
 // カラムボタン
 var btn_col_sm12	= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm12">12/12</span>';
 var btn_col_sm9		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm9">9/12</span>';
@@ -372,10 +374,12 @@ function vkEdit_btn_addCol(){
 					for (i2 = 0; i2 < colSize_array.length; i2++) {
 						colSize += colSize_array[i2];
 					}
+					// col-クラスの時だけ値を加算する
+					allColSize = parseInt(allColSize,10) + parseInt(colSize,10);
 				}
 			}
 
-			allColSize = allColSize + parseInt(colSize);
+			
 		}); // 今ある全部のカラムサイズを取得
 
 		/*-------------------------------------------*/
@@ -398,40 +402,47 @@ function vkEdit_btn_addCol(){
 				for (i2 = 0; i2 < colSize_array.length; i2++) {
 					colSize += colSize_array[i2];
 				}
-				colSize_number = parseInt(colSize);
+				// カラムサイズ
+				var colSize_number = parseInt(colSize);
 			}
 		}
 
 		/*-------------------------------------------*/
 		// 追加するカラムのサイズ計算
 		/*-------------------------------------------*/
-		// 12 == 今ある全部のカラムサイズ
-		if ( 12 == allColSize ) {
-			// 操作したカラムサイズ = 操作したカラムサイズ/2
-			// var editColSize = new Number(0);
-			var editColSize = colSize_number / 2;
-			// 追加するカラムサイズ = 操作したカラムサイズ/2
-			var addColSize = colSize_number / 2;
-
 		// 12 > 今ある全部のカラムサイズ
-		} else if ( 12 > allColSize ) {
+		if ( 12 > allColSize ) {
 			// 操作したカラムサイズ = そのまま
 			var editColSize = colSize_number;
 			// 追加するカラムサイズ = 12 - 今ある全部のカラムサイズ
 			var addColSize = 12 - allColSize;
+
+		// 12 == 今ある全部のカラムサイズ
+		} else if ( 12 == allColSize ) {
+			// 操作したカラムサイズ = 操作したカラムサイズ/2
+			// 切り上げして整数にする
+			var editColSize = Math.ceil(colSize_number / 2);
+			// 追加するカラムサイズ = 操作したカラムサイズ/2
+			// 切り捨てして整数にする
+			var addColSize = Math.floor(colSize_number / 2);
+
+			// カラムを追加しても十分な大きさが確保出来る場合
+			if ( ( editColSize > 1 ) && ( addColSize > 1 ) ) {
+
+				/*-------------------------------------------*/
+				// カラムを追加
+				/*-------------------------------------------*/
+				// 操作したカラムのサイズクラスを削除・新しいサイズクラスを追加する
+				select_edittingColumns.removeClass(colClass_editting_sizeClass).addClass('col-sm-'+editColSize);
+				// カラムを追加する
+				var add_row_html = '<div class="col-sm-'+ addColSize +'">Input here.</div>';
+				select_edittingColumns.after(add_row_html);
+				vkEdit_row_action();
+				vkEdit_col_action();
+			} else {
+				alert("Can't add colum any more.");
+			}
 		}
-		// 12 < 今ある全部のカラムサイズ
-			// カラムの数が多すぎるアラート
-
-		// 操作したカラムのサイズクラスを削除・新しいサイズクラスを追加する
-		select_edittingColumns.removeClass(colClass_editting_sizeClass).addClass('col-sm-'+editColSize);
-
-		// カラムを追加する
-		var add_row_html = '<div class="col-sm-'+ addColSize +'">Input here.</div>';
-		select_edittingColumns.after(add_row_html);
-
-		vkEdit_row_action();
-		vkEdit_col_action();
 	});
 }
 function vkEdit_btn_delCol(){
