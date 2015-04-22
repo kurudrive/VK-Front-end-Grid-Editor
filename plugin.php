@@ -74,7 +74,6 @@ add_action( 'wp_head', 'add_my_ajaxurl', 1 );
 /* ajax _
 /*-------------------------------------------*/
 function content_edit() {
-    print '<pre style="text-align:left">';print_r(get_edit_post_link( $post->ID ));print '</pre>';
     if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
 ?>
 <script>
