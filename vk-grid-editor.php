@@ -13,6 +13,11 @@
  */
 
 /*-------------------------------------------*/
+/*  設定画面
+/*-------------------------------------------*/
+require( dirname( __FILE__ ) . '/vk-grid-edit-admin.php' );
+
+/*-------------------------------------------*/
 /* ajax _ jsファイル読み込み
 /*-------------------------------------------*/
 if (  function_exists( 'vkEdit2_setup' ) ) :
@@ -45,7 +50,10 @@ add_action('wp_head', 'vkEdit2_style_setup');
 /* フロント用CSSファイルの読み込み
 /*-------------------------------------------*/
 function vkEdit2_front_style_setup(){
-    wp_enqueue_style( 'vkEdit2_style_setup_load_bootstrap_css', plugins_url('css/bootstrap.min.css', __FILE__) , false, '2015-04-19');
+    $options = vkEdit_get_plugin_options();
+    if ( !$options['remove_front_css'] ) {
+        wp_enqueue_style( 'vkEdit2_style_setup_load_bootstrap_css', plugins_url('css/bootstrap.min.css', __FILE__) , false, '2015-04-19');
+    }
 }
 add_action('wp_head', 'vkEdit2_front_style_setup');
 
@@ -53,8 +61,11 @@ add_action('wp_head', 'vkEdit2_front_style_setup');
 /*  Admin page _ Add editor css
 /*-------------------------------------------*/
 function vkEdit_add_editor_style_setup() {
-    $gridCss_url = plugins_url('css/bootstrap.min.css', __FILE__);
-    add_editor_style( $gridCss_url );
+    $options = vkEdit_get_plugin_options();
+    if ( !$options['remove_admin_css'] ) {
+        $gridCss_url = plugins_url('css/bootstrap.min.css', __FILE__);
+        add_editor_style( $gridCss_url );
+    }
 }
 add_action( 'after_setup_theme', 'vkEdit_add_editor_style_setup' );
 
