@@ -24,16 +24,20 @@ function vkEdit2_setup() {
 }
 
 function vkEdit2_scripts(){
-	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script('vkEdit2_main_js', plugins_url("js/vkEdit2_main.js", __FILE__) ,array(), '1.0', true);
+    if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
+    	wp_enqueue_script( 'jquery' );
+    	wp_enqueue_script('vkEdit2_main_js', plugins_url("js/vkEdit2_main.js", __FILE__) ,array(), '1.0', true);
+    } // if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
 }
 
 /*-------------------------------------------*/
 /* 編集用CSSファイルの読み込み
 /*-------------------------------------------*/
 function vkEdit2_style_setup(){
-    wp_enqueue_style( 'vkEdit2_style_setup_load_admin_css', plugins_url('css/admin_style.css', __FILE__) , false, '2015-04-13');
-    wp_enqueue_style( 'vkEdit2_style_setup_load_awesome_css', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' , false);
+    if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
+        wp_enqueue_style( 'vkEdit2_style_setup_load_admin_css', plugins_url('css/admin_style.css', __FILE__) , false, '2015-04-13');
+        wp_enqueue_style( 'vkEdit2_style_setup_load_awesome_css', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' , false);
+    } // if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
 }
 add_action('wp_head', 'vkEdit2_style_setup');
 
@@ -70,6 +74,8 @@ add_action( 'wp_head', 'add_my_ajaxurl', 1 );
 /* ajax _
 /*-------------------------------------------*/
 function content_edit() {
+    print '<pre style="text-align:left">';print_r(get_edit_post_link( $post->ID ));print '</pre>';
+    if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
 ?>
 <script>
 function vkEdit_saveStart(){
@@ -78,6 +84,7 @@ function vkEdit_saveStart(){
         <?php global $post; ?>
         var post_id = '<?php echo $post->ID; ?>';
         var post_content = jQuery('#vkEdit_editWrap').html();
+        // 保存ボタンをクリックされたらボタンを変更する
         jQuery(this).html('<i class="fa fa-refresh"></i>');
         // 編集パネルが消える前に保存されるのを防ぐために少し待つ
         setTimeout(function(){        
@@ -102,9 +109,9 @@ function vkEdit_saveStart(){
         return false;
     });  
 }
-
 </script>
 <?php
+    } // if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
 }
 add_action( 'wp_footer', 'content_edit', 1 );
 
@@ -135,7 +142,7 @@ add_action( 'wp_ajax_ajax_post_update', 'ajax_post_update' );
 add_action( 'wp_ajax_nopriv_ajax_post_update', 'ajax_post_update' );
 
 /*-------------------------------------------*/
-/*  Display post author unit
+/*  When content empty
 /*-------------------------------------------*/
 add_filter( 'the_content', 'vkEdit_add_editWrap',2);
 function vkEdit_add_editWrap($content){
