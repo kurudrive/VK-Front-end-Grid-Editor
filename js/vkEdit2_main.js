@@ -61,7 +61,7 @@ var btn_row_add_down 	= '<span class="vkEdit_btn vkEdit_btn_addRow vkEdit_btn_ad
 var btn_row_del 	= '<span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-times"></i> Del</span>';
 
 // 行追加編集パネル
-var html_rowEditPanel = '<div class="vkEdit_editPanel_row  vkEdit_no_add_row">' + btn_row_add_up + btn_row_add_down + btn_row_del + '</div>';
+var html_rowEditPanel = '<div class="vkEdit_editPanel_row vkEdit_no_add_row">' + btn_row_add_up + btn_row_add_down + btn_row_del + '</div>';
 var html_rowDefaultSet = '<div class="row"><div class="col-sm-12">Input here.</div></div>';
 
 /*-------------------------------------------*/
@@ -339,30 +339,39 @@ function vkEdit_btn_changeCol(){
 /*-------------------------------------------*/
 function vkEdit_btn_addCol(){
 	jQuery('.vkEdit_btn_addCol').click(function(){
-
 		var select_edittingColumns = jQuery(this).parent().parent().parent();
 
+		/*-------------------------------------------*/
 		// 今ある全部のカラムサイズを取得する
+		/*-------------------------------------------*/
 		var allColSize = new Number(0);
 		// rowの中のカラムをループ
 		jQuery(this).parent().parent().parent().parent().children('div').each(function(i){
 
 			// 1.カラムのクラスを全て取得
 			var colClass_all = jQuery(this).attr('class');
-			// クラス名に col- が含まれている場合
-			if ( colClass_all.match(/col-/) ) {
-				// 数字の部分だけを取り出し（１文字ずつ判別するので２桁でも配列になる）
-				var colSize_array = colClass_array[i].match(/[1-9]/g);
-				// カラムのサイズ（配列になってしまったカラムの数字を2桁にするためにくっつける）
-				var colSize = new String();
-				for (i2 = 0; i2 < colSize_array.length; i2++) {
-					colSize += colSize_array[i2];
+			// 2.カラムのクラスを配列に分割
+			var colClass_array = colClass_all.split(" ");
+			// 3.カラムのクラスを順番に回す
+			for (i = 0; i < colClass_array.length; i++) {
+				// クラス名に col- が含まれている場合
+				if ( colClass_array[i].match(/col-/) ) {
+					// 数字の部分だけを取り出し（１文字ずつ判別するので２桁でも配列になる）
+					var colSize_array = colClass_array[i].match(/[1-9]/g);
+					// カラムのサイズ（配列になってしまったカラムの数字を2桁にするためにくっつける）
+					var colSize = new String();
+					for (i2 = 0; i2 < colSize_array.length; i2++) {
+						colSize += colSize_array[i2];
+					}
 				}
 			}
 
 			allColSize = allColSize + parseInt(colSize);
 		}); // 今ある全部のカラムサイズを取得
 
+		/*-------------------------------------------*/
+		// カラム追加ボタンを押したカラムのサイズを取得する
+		/*-------------------------------------------*/
 		// 1.カラムのクラスを全て取得
 		var colClass_all = select_edittingColumns.attr('class');
 		// 2.カラムのクラスを配列に分割
@@ -370,10 +379,10 @@ function vkEdit_btn_addCol(){
 		// 3.カラムのクラスを順番に回す
 		for (i = 0; i < colClass_array.length; i++) {
 			// クラス名に col- が含まれている場合
-			if ( colClass_all.match(/col-/) ) {
-				// 編集パネルが出ているカラムのサイズクラス
+			if ( colClass_array[i].match(/col-/) ) {
+				// 編集中のカラムサイズクラス（）
 				var colClass_editting_sizeClass = colClass_array[i];
-				// 数字の部分だけを取り出し（１文字ずつ判別するので２桁でも配列になる）
+				// 編集パネルが出ているカラムのサイズクラスを取り出して、その数字の部分を取り出し（１文字ずつ判別するので２桁でも配列になる）
 				var colSize_array = colClass_array[i].match(/[1-9]/g);
 				// カラムのサイズ（配列になってしまったカラムの数字を2桁にするためにくっつける）
 				var colSize = new String();　
@@ -384,6 +393,9 @@ function vkEdit_btn_addCol(){
 			}
 		}
 
+		/*-------------------------------------------*/
+		// 追加するカラムのサイズ計算
+		/*-------------------------------------------*/
 		// 12 == 今ある全部のカラムサイズ
 		if ( 12 == allColSize ) {
 			// 操作したカラムサイズ = 操作したカラムサイズ/2
