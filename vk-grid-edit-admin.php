@@ -46,9 +46,7 @@ add_action( 'admin_menu', 'vkEdit_add_customSetting' );
 /*-------------------------------------------*/
 function vkEdit_add_customSettingPage() { ?>
 <div class="wrap" id="vkEdit_plugin_options">
-<?php screen_icon(); ?>
 <h2>VK Front-end Grid Editor Setting</h2>
-
 
 <div style="width:68%;display:inline-block;vertical-align:top;">
 
@@ -59,11 +57,11 @@ function vkEdit_add_customSettingPage() { ?>
 	$default_options = vkEdit_get_default_options();
 ?>
 
-<h3><?php _e('Do not display Grid css of VK Front-end Grid Editor.');?></h3>
-<p><?php _e('If your theme already included bootstrap css, please check the following check box.');?></p>
+<h3><?php _e('Do not display Grid css of VK Front-end Grid Editor.','vk-front-end-grid-editor');?></h3>
+<p><?php _e('If your theme already included bootstrap css, please check the following check box.','vk-front-end-grid-editor');?></p>
 <ul>
-<li><input type="checkbox" name="vkEdit_plugin_options[remove_front_css]" id="vkEdit_plugin_options" value="true" <?php echo (isset($options['remove_front_css']) && $options['remove_front_css'])? 'checked': ''; ?> /> <?php _e('Front page');?></li>
-<li><input type="checkbox" name="vkEdit_plugin_options[remove_admin_css]" id="vkEdit_plugin_options" value="true" <?php echo (isset($options['remove_admin_css']) && $options['remove_admin_css'])? 'checked': ''; ?> /> <?php _e('Admin page');?></li>
+<li><input type="checkbox" name="vkEdit_plugin_options[remove_front_css]" id="vkEdit_plugin_options" value="true" <?php echo (isset($options['remove_front_css']) && $options['remove_front_css'])? 'checked': ''; ?> /> <?php _e('Front page','vk-front-end-grid-editor');?></li>
+<li><input type="checkbox" name="vkEdit_plugin_options[remove_admin_css]" id="vkEdit_plugin_options" value="true" <?php echo (isset($options['remove_admin_css']) && $options['remove_admin_css'])? 'checked': ''; ?> /> <?php _e('Admin page','vk-front-end-grid-editor');?></li>
 </ul>
 
 <?php submit_button(); ?>

@@ -1,6 +1,5 @@
 === VK Front-end Grid Editor ===
 Contributors: kurudrive,vektor-inc,bizvektor
-Donate link:
 Tags: post,author
 Requires at least: 3.3
 Tested up to: 4.1.2
@@ -18,10 +17,6 @@ This plugin can create bootstrap grid layout on front-end.
 
 1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-
-== Frequently asked questions ==
-
-
 
 == Screenshots ==
 
