@@ -527,9 +527,14 @@ function vkEdit_rowWrap_click(){
 /*-------------------------------------------*/
 jQuery('#vkEdit_editWrap').mouseenter(function(){
 	if ( !jQuery(this).children('div').hasClass('vkEdit_editPanel_firstAddrow') ){
-		var html_first_addRow_panel = '<div id="vkEdit_editPanel_firstAddrow" class="vkEdit_editPanel_firstAddrow"><div>' + btn_row_add_down + '</div></div>';
+		var html_first_addRow_panel = '<div id="vkEdit_editPanel_firstAddrow" class="vkEdit_editPanel_firstAddrow">' + btn_row_add_down + '</div>';
 		jQuery(this).prepend(html_first_addRow_panel);
-		vkEdit_btn_addRow();
+		jQuery(this).find('.vkEdit_btn_addRow_down').click(function(){
+			jQuery(this).parent().after(html_rowDefaultSet);
+			vkEdit_row_action();
+			vkEdit_col_action();
+			vkEdit_display_masterPanel();
+		});
 	}
 	// マウスアウトしたら
 	jQuery(this).mouseleave(function(){
