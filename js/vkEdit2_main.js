@@ -522,3 +522,18 @@ function vkEdit_rowWrap_click(){
 		vkEdit_display_masterPanel();
 	});
 }
+/*-------------------------------------------*/
+// Row Wrap ボタンが押された時の処理
+/*-------------------------------------------*/
+jQuery('#vkEdit_editWrap').mouseenter(function(){
+	if ( !jQuery(this).children('div').hasClass('vkEdit_editPanel_firstAddrow') ){
+		var html_first_addRow_panel = '<div id="vkEdit_editPanel_firstAddrow" class="vkEdit_editPanel_firstAddrow"><div>' + btn_row_add_down + '</div></div>';
+		jQuery(this).prepend(html_first_addRow_panel);
+		vkEdit_btn_addRow();
+	}
+	// マウスアウトしたら
+	jQuery(this).mouseleave(function(){
+		// vkEdit_editPanel_firstAddrowパネルを削除
+		jQuery(this).children('#vkEdit_editPanel_firstAddrow').remove();
+	});
+});
