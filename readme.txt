@@ -1,0 +1,43 @@
+=== VK Front-end Grid Editor ===
+Contributors: kurudrive,vektor-inc,bizvektor
+Donate link:
+Tags: post,author
+Requires at least: 3.3
+Tested up to: 4.1.2
+Stable tag: 0.1.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+This plugin can create bootstrap grid layout on front-end.
+
+== Description ==
+
+This plugin can create bootstrap grid layout on front-end.
+
+== Installation ==
+
+1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in WordPress
+
+== Frequently asked questions ==
+
+
+
+== Screenshots ==
+
+1. Display to post author information with latest entries box on bottom of the contents.
+2. user information edit page.
+3. You can edit "Post author box title","Post list box title","Display post thumbnail image" and more...
+
+== Changelog ==
+
+= 0.1.0 =
+
+* First release.
+
+
+== Upgrade notice ==
+
+Nothing.
+
+== Arbitrary section 1 ==
