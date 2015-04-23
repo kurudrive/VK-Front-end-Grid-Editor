@@ -157,12 +157,12 @@ var btn_col_del 	= '<span class="vkEdit_btn vkEdit_btn_delCol"><i class="fa fa-t
 var btn_col_change 	= '<span class="vkEdit_btn vkEdit_btn_change"><i class="fa fa-check-square"></i> Change</span>';
 var btn_col_chancel = '<span class="vkEdit_btn vkEdit_btn_cancel"><i class="fa fa-times"></i> Cancel</span>';
 // カラムボタン
-var btn_col_sm12	= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm12">12/12</span>';
-var btn_col_sm9		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm9">9/12</span>';
-var btn_col_sm8		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm8">8/12</span>';
-var btn_col_sm6		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm6">6/12</span>';
-var btn_col_sm4		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm4">4/12</span>';
-var btn_col_sm3		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm3">3/12</span>';
+var btn_col_sm12	= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm12">1/1</span>';
+var btn_col_sm9		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm9">3/4</span>';
+var btn_col_sm8		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm8">2/3</span>';
+var btn_col_sm6		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm6">1/2</span>';
+var btn_col_sm4		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm4">1/3</span>';
+var btn_col_sm3		= '<span class="vkEdit_btn vkEdit_btn_colSize vkEdit_btn_sm3">1/4</span>';
 
 // カラムサイズボタンセット
 var html_colEditPanel_btnSet_size = '<div class="vkEdit_btnSet_size vkEdit_no_add_row">'+ btn_col_sm12 + btn_col_sm9 + btn_col_sm8 + btn_col_sm6 + btn_col_sm4 + btn_col_sm3 +'</div>';
