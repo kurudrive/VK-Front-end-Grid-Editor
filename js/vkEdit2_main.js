@@ -481,23 +481,27 @@ function vkEdit_display_masterPanel(){
 /*-------------------------------------------*/
 var btn_rowWrap = '<span class="vkEdit_btn vkEdit_btn_rowWrap"><i class="fa fa-sign-in"></i> Row Wrap</span>';
 function vkEdit_rowWrapBtn_display(){
-	jQuery('#vkEdit_editWrap div,#vkEdit_editWrap h1,#vkEdit_editWrap h2,#vkEdit_editWrap h3,#vkEdit_editWrap h4,#vkEdit_editWrap h5,#vkEdit_editWrap h6,#vkEdit_editWrap p,#vkEdit_editWrap ul,#vkEdit_editWrap ol,#vkEdit_editWrap block,#vkEdit_editWrap blockquote').each(function(i){
+	jQuery('#vkEdit_editWrap div,#vkEdit_editWrap h1,#vkEdit_editWrap h2,#vkEdit_editWrap h3,#vkEdit_editWrap h4,#vkEdit_editWrap h5,#vkEdit_editWrap h6,#vkEdit_editWrap p,#vkEdit_editWrap ul,#vkEdit_editWrap ol,#vkEdit_editWrap dl,#vkEdit_editWrap block,#vkEdit_editWrap blockquote').each(function(i){
 			// マウスオーバーしたら
 			jQuery(this).mouseenter(function(){
-				// divのクラスを全て取得
+				// ホバー要素のクラスを全て取得
 				var colClass_all = jQuery(this).attr('class');
-				// 既にrowWrapボタンが存在しない場合 && 既に rowでない場合 && カラムでない場合 && rowWrapボタンを表示する対象でない場合
-				if ( !jQuery(this).children().hasClass('vkEdit_btn_rowWrap') && !jQuery(this).hasClass('row') && !jQuery(this).hasClass('vkEdit_no_add_row') && !colClass_all.match(/col-/) ){
 
-					// rowWrapボタンを表示
-					jQuery(this).prepend(btn_rowWrap);
-					// rowWrapボタンが押されたら
-					vkEdit_rowWrap_click();
-					// マウスアウトしたら
-					jQuery(this).mouseleave(function(){
-						// rowWrapボタンを削除
-						jQuery(this).children('.vkEdit_btn_rowWrap').remove();
-					});
+				// 既にrowWrapボタンが存在しない場合 && 既に rowでない場合 && カラムでない場合 && rowWrapボタンを表示する対象でない場合
+				if ( !jQuery(this).children().hasClass('vkEdit_btn_rowWrap') && !jQuery(this).hasClass('row') && !jQuery(this).hasClass('vkEdit_no_add_row') ){
+					// ホバー要素のクラスが空の場合か col ではない場合
+					if ( !colClass_all || !(colClass_all && colClass_all.match(/col-/)) ) {
+						// rowWrapボタンを表示
+						jQuery(this).prepend(btn_rowWrap);
+						// rowWrapボタンが押されたら
+						vkEdit_rowWrap_click();
+						// マウスアウトしたら
+						jQuery(this).mouseleave(function(){
+							// rowWrapボタンを削除
+							jQuery(this).children('.vkEdit_btn_rowWrap').remove();
+						});
+					}
+
 				}
 			});
 	});

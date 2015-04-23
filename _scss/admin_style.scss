@@ -20,9 +20,10 @@ $col_bg_active : #ffffcc;
 
 .sen { border:1px solid #ff0000;}
 
-.vkEdit_btn { display:inline-block;padding:2px 5px; margin:0 2px;font-size:10px;line-height: 14px; background-color: #555;color:#f5f5f5;cursor: pointer;
+.vkEdit_btn { display:inline-block;padding:1px 4px; margin:0 2px;font-size:10px;line-height: 14px; background-color: #555;color:#f5f5f5;cursor: pointer;border-radius: 2px;
 	&.vkEdit_btn_colSize { background-color: #e5e5e5;color:#666; }
-	&.vkEdit_btn_edit { background-color:#1b809e; } 
+	&.vkEdit_btn_edit { background-color:#1b809e; }
+	&:hover { background-color: #c00;color:#fff; }
 }
 .vkEdit_btnSet { display:block; overflow:hidden;float:left; }
 .vkEdit_btnSet.hidden { display: none; }
@@ -31,9 +32,9 @@ $col_bg_active : #ffffcc;
 .vkEdit_editPanel_row { clear:both;display:block; overflow:hidden;background-color: $rowPanel_color;padding: 0 23px;height:0; }
 
 .vkEdit_column_hover { background-color: $col_bg_active; }
-.vkEdit_editPanel_col { clear:both;display:block; overflow:hidden;background-color: $panel_color;padding: 0 8px;
+.vkEdit_editPanel_col { clear:both;display:block; overflow:hidden;background-color: $panel_color;padding: 0 8px 1px;
 	.vkEdit_btnSet_size { float:none;clear: both; }
 }
-.vkEdit_column_active textarea { display:block; overflow:hidden;width: 100%;padding: 0; }
+.vkEdit_column_active textarea { display:block; overflow:hidden;width: 100%;padding: 0;border:1px dotted #c00; }
 
 // .column { border:1px dotted #333;margin:1px; }

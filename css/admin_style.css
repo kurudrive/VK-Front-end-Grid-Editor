@@ -12,9 +12,10 @@ header h1 { margin: 0; }
 
 .sen { border: 1px solid #ff0000; }
 
-.vkEdit_btn { display: inline-block; padding: 2px 5px; margin: 0 2px; font-size: 10px; line-height: 14px; background-color: #555; color: #f5f5f5; cursor: pointer; }
+.vkEdit_btn { display: inline-block; padding: 1px 4px; margin: 0 2px; font-size: 10px; line-height: 14px; background-color: #555; color: #f5f5f5; cursor: pointer; border-radius: 2px; }
 .vkEdit_btn.vkEdit_btn_colSize { background-color: #e5e5e5; color: #666; }
 .vkEdit_btn.vkEdit_btn_edit { background-color: #1b809e; }
+.vkEdit_btn:hover { background-color: #c00; color: #fff; }
 
 .vkEdit_btnSet { display: block; overflow: hidden; float: left; }
 
@@ -26,7 +27,7 @@ header h1 { margin: 0; }
 
 .vkEdit_column_hover { background-color: #ffffcc; }
 
-.vkEdit_editPanel_col { clear: both; display: block; overflow: hidden; background-color: #999; padding: 0 8px; }
+.vkEdit_editPanel_col { clear: both; display: block; overflow: hidden; background-color: #999; padding: 0 8px 1px; }
 .vkEdit_editPanel_col .vkEdit_btnSet_size { float: none; clear: both; }
 
-.vkEdit_column_active textarea { display: block; overflow: hidden; width: 100%; padding: 0; }
+.vkEdit_column_active textarea { display: block; overflow: hidden; width: 100%; padding: 0; border: 1px dotted #c00; }
