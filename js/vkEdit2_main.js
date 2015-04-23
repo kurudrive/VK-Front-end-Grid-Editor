@@ -64,13 +64,13 @@ jQuery(document).ready(function($){
 
 var class_columns	= '.col-sm-12,.col-sm-11,.col-sm-10,.col-sm-9,.col-sm-9,.col-sm-7,.col-sm-6,.col-sm-5,.col-sm-4,.col-sm-3,.col-sm-2,.col-sm-1,'
 
-var btn_row_add_up 		= '<span class="vkEdit_btn vkEdit_btn_addRow vkEdit_btn_addRow_up"><i class="fa fa-caret-square-o-up"></i> + Add Row</span>';
-var btn_row_add_down 	= '<span class="vkEdit_btn vkEdit_btn_addRow vkEdit_btn_addRow_down"><i class="fa fa-caret-square-o-down"></i> + Add Row</span>';
+var btn_row_add_up 		= '<span class="vkEdit_btn vkEdit_btn_addRow vkEdit_btn_addRow_up"><i class="fa fa-caret-up"></i> Add Row</span>';
+var btn_row_add_down 	= '<span class="vkEdit_btn vkEdit_btn_addRow vkEdit_btn_addRow_down"><i class="fa fa-caret-down"></i> Add Row</span>';
 var btn_row_del 	= '<span class="vkEdit_btn vkEdit_btn_delRow"><i class="fa fa-times"></i> Del</span>';
 
 // 行追加編集パネル
 var html_rowEditPanel = '<div class="vkEdit_editPanel_row vkEdit_no_add_row">' + btn_row_add_up + btn_row_add_down + btn_row_del + '</div>';
-var html_rowDefaultSet = '<div class="row"><div class="col-sm-12">Input here.</div></div>';
+var html_rowDefaultSet = '<div class="row"><div class="col-sm-12"><p>Input here.</p></div></div>';
 
 /*-------------------------------------------*/
 // row の基本処理
