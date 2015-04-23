@@ -2,7 +2,7 @@
 /*
  * Plugin Name: VK Front-end Grid Editor
  * Plugin URI: http://grid-editor.vektor-inc.co.jp/
- * Description: This plugin can create bootstrap grid layout.
+ * Description: This plugin can create bootstrap grid layout on front-end.
  * Version: 1.0
  * Author: kurudrive @ Vektor,Inc
  * Author URI:
@@ -93,7 +93,7 @@ function vkEdit_saveStart(){
 
         // 
         if( jQuery('#vkEdit_editWrap').find('div').hasClass('vkEdit_editPanel_col') ){
-            alert('編集中のカラムがあるため保存出来ません。');
+            alert('<?php _e('You can not save because there is a column that is being edited.'); ?>');
         } else {
 
             // phpに投げる変数（変更するポストID）
