@@ -22,14 +22,15 @@ $col_bg_active : #ffffcc;
 
 .vkEdit_btn { display:inline-block;padding:2px 5px; margin:0 2px;font-size:10px;line-height: 14px; background-color: #555;color:#f5f5f5;cursor: pointer;
 	&.vkEdit_btn_colSize { background-color: #e5e5e5;color:#666; }
+	&.vkEdit_btn_edit { background-color:#1b809e; } 
 }
 .vkEdit_btnSet { display:block; overflow:hidden;float:left; }
 .vkEdit_btnSet.hidden { display: none; }
 
-.vkEdit_row_hover { background-color: #dff0d8; }
+.vkEdit_row_hover { background-color: #f5f5f5;border:1px solid #333; }
 .vkEdit_editPanel_row { clear:both;display:block; overflow:hidden;background-color: $rowPanel_color;padding: 0 23px;height:0; }
 
-.vkEdit_column_hover { background-color: $col_bg_active }
+.vkEdit_column_hover { background-color: $col_bg_active; }
 .vkEdit_editPanel_col { clear:both;display:block; overflow:hidden;background-color: $panel_color;padding: 0 8px;
 	.vkEdit_btnSet_size { float:none;clear: both; }
 }

@@ -14,12 +14,13 @@ header h1 { margin: 0; }
 
 .vkEdit_btn { display: inline-block; padding: 2px 5px; margin: 0 2px; font-size: 10px; line-height: 14px; background-color: #555; color: #f5f5f5; cursor: pointer; }
 .vkEdit_btn.vkEdit_btn_colSize { background-color: #e5e5e5; color: #666; }
+.vkEdit_btn.vkEdit_btn_edit { background-color: #1b809e; }
 
 .vkEdit_btnSet { display: block; overflow: hidden; float: left; }
 
 .vkEdit_btnSet.hidden { display: none; }
 
-.vkEdit_row_hover { background-color: #dff0d8; }
+.vkEdit_row_hover { background-color: #f5f5f5; border: 1px solid #333; }
 
 .vkEdit_editPanel_row { clear: both; display: block; overflow: hidden; background-color: #333; padding: 0 23px; height: 0; }
 
