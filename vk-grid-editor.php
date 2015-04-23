@@ -26,16 +26,19 @@ if (  function_exists( 'vkEdit2_setup' ) ) :
 endif;
 
 function vkEdit2_setup() {
-    if ( is_page() || is_single() ){
+
 	   add_action('wp_enqueue_scripts','vkEdit2_scripts',5);
-    }
+
 }
 
 function vkEdit2_scripts(){
-    if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
-    	wp_enqueue_script( 'jquery' );
-    	wp_enqueue_script('vkEdit2_main_js', plugins_url("js/vkEdit2_main.js", __FILE__) ,array(), '1.0', true);
-    } // if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
+    if ( is_page() || is_single() ){
+        global $post;
+        if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
+        	wp_enqueue_script( 'jquery' );
+        	wp_enqueue_script('vkEdit2_main_js', plugins_url("js/vkEdit2_main.js", __FILE__) ,array(), '1.0', true);
+        } // if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
+    }
 }
 
 /*-------------------------------------------*/
