@@ -25,9 +25,8 @@ This plugin can create bootstrap grid layout on front-end.
 
 == Screenshots ==
 
-1. Display to post author information with latest entries box on bottom of the contents.
-2. user information edit page.
-3. You can edit "Post author box title","Post list box title","Display post thumbnail image" and more...
+1. Column mouseover.
+2. Column content edit.
 
 == Changelog ==
 
