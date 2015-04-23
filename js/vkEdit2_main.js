@@ -422,7 +422,7 @@ function vkEdit_btn_addCol(){
 			var editColSize = colSize_number;
 			// 追加するカラムサイズ = 12 - 今ある全部のカラムサイズ
 			var addColSize = 12 - allColSize;
-
+			var addCol = true;
 		// 12 == 今ある全部のカラムサイズ
 		} else if ( 12 == allColSize ) {
 			// 操作したカラムサイズ = 操作したカラムサイズ/2
@@ -434,20 +434,22 @@ function vkEdit_btn_addCol(){
 
 			// カラムを追加しても十分な大きさが確保出来る場合
 			if ( ( editColSize > 1 ) && ( addColSize > 1 ) ) {
-
-				/*-------------------------------------------*/
-				// カラムを追加
-				/*-------------------------------------------*/
-				// 操作したカラムのサイズクラスを削除・新しいサイズクラスを追加する
-				select_edittingColumns.removeClass(colClass_editting_sizeClass).addClass('col-sm-'+editColSize);
-				// カラムを追加する
-				var add_row_html = '<div class="col-sm-'+ addColSize +'">Input here.</div>';
-				select_edittingColumns.after(add_row_html);
-				vkEdit_row_action();
-				vkEdit_col_action();
+				var addCol = true;
 			} else {
 				alert("Can't add colum any more.");
+				var addCol = false;
 			}
+		}
+		if (addCol) {
+			/*-------------------------------------------*/
+			// カラムを追加
+			/*-------------------------------------------*/
+			// 操作したカラムのサイズクラスを削除・新しいサイズクラスを追加する
+			select_edittingColumns.removeClass(colClass_editting_sizeClass).addClass('col-sm-'+editColSize);
+			// カラムを追加する
+			var add_col_html = '<div class="col-sm-'+ addColSize +'">Input here.</div>';
+			select_edittingColumns.after(add_col_html);
+			vkEdit_col_action();
 		}
 	});
 }
