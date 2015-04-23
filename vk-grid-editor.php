@@ -170,6 +170,10 @@ add_action( 'wp_ajax_nopriv_ajax_post_update', 'ajax_post_update' );
 add_filter( 'the_content', 'vkEdit_add_editWrap',2);
 function vkEdit_add_editWrap($content){
     if ( get_edit_post_link( $post->ID ) ) { // 記事の編集権限があるなら
+
+        // $contentの中身が何もなかった場合の処理
+        if ( $content == '') $content = '<div class="row"><div class="col-sm-12">Input here.</div></div>';
+
         // $contentを保存用のdivで囲う
         $content = '<div id="vkEdit_editWrap">'.$content.'</div>';
         return $content;
