@@ -3,15 +3,15 @@ Contributors: kurudrive,vektor-inc,bizvektor
 Tags: post,author
 Requires at least: 3.3
 Tested up to: 4.1.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin can create bootstrap grid layout on front-end.
+This plugin can create Bootstrap grid layout on front-end.
 
 == Description ==
 
-This plugin can create bootstrap grid layout on front-end.
+This plugin can create Bootstrap grid layout on front-end.
 
 == Installation ==
 
@@ -33,6 +33,9 @@ This plugin can create bootstrap grid layout on front-end.
 
 * Bug fix of add row.
 
+= 1.0.2 =
+
+* Update test.
 
 == Upgrade notice ==
 
