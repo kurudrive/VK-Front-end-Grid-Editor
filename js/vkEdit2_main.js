@@ -34,6 +34,8 @@
 				/*-------------------------------------------*/
 				// カラムを追加
 /*-------------------------------------------*/
+// カラム削除ボタンを押された時の処理
+/*-------------------------------------------*/
 // 保存ボタン表示処理
 		/*-------------------------------------------*/
 		// 保存処理（php側に記載）
@@ -139,10 +141,10 @@ function vkEdit_btn_addRow(){
 /*-------------------------------------------*/
 function vkEdit_btn_delRow(){
 	jQuery('.vkEdit_btn_delRow').click(function(){
-		if (confirm("Are you sure?")) {
+		// if (confirm("Are you sure?")) {
 			jQuery(this).parent().parent().remove();
 			vkEdit_display_masterPanel();
-		}
+		// }
 	});
 }
 
@@ -453,12 +455,15 @@ function vkEdit_btn_addCol(){
 		}
 	});
 }
+/*-------------------------------------------*/
+// カラム削除ボタンを押された時の処理
+/*-------------------------------------------*/
 function vkEdit_btn_delCol(){
 	jQuery('.vkEdit_btn_delCol').click(function(){
-		if (confirm("Are you sure?")) {
+		// if (confirm("Are you sure?")) { ブラウザでアラートが出ないようにチェックされると操作不能になる。
 			jQuery(this).parent().parent().parent().remove();
 			vkEdit_display_masterPanel();
-		}
+		// }
 	});
 }
 
