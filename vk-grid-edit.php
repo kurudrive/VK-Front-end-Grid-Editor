@@ -62,7 +62,7 @@ function vkEdit2_front_style_setup(){
         wp_enqueue_style( 'vkEdit2_style_setup_load_bootstrap_css', plugins_url('css/bootstrap.min.css', __FILE__) , false, '2015-04-19');
     }
 }
-add_action('wp_head', 'vkEdit2_front_style_setup');
+add_action('wp_enqueue_scripts', 'vkEdit2_front_style_setup',1);
 
 /*-------------------------------------------*/
 /*  Admin page _ Add editor css
